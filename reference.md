@@ -4,3 +4,17 @@
 - https://openwrt.org/docs/guide-user/base-system/basic-networking
 - https://openwrt.org/docs/guide-user/network/wan/multiwan/multiwan_package
 opkg install mwan3
+- https://oldwiki.archive.openwrt.org/doc/uci/network
+- https://openwrt.org/docs/guide-user/services/vpn/openvpn/dual-wan
+- https://www.karlrupp.net/en/computer/nat_tutorial
+
+```
+root@OpenWrt:~# iptables -t nat -A POSTROUTING -o eth2.10 -j MASQUERADE
+root@OpenWrt:~# iptables -t nat -A POSTROUTING -o eth2.20 -j MASQUERADE\
+iptables -t nat -L -vn
+root@OpenWrt:~# iptables -t nat -A POSTROUTING -o eth2.20 -s 10.0.10.0/24 -j MASQUERADE
+root@OpenWrt:~# iptables -t nat -A POSTROUTING -o eth2.20 -s 10.0.20.0/24 -j MASQUERADE
+root@OpenWrt:~# iptables -t nat -A POSTROUTING -o eth2.10 -s 10.0.20.0/24 -j MASQUERADE
+root@OpenWrt:~# iptables -t nat -A POSTROUTING -o eth2.10 -s 10.0.10.0/24 -j MASQUERADE
+
+```
