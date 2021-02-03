@@ -18,3 +18,6 @@ root@OpenWrt:~# iptables -t nat -A POSTROUTING -o eth2.10 -s 10.0.20.0/24 -j MAS
 root@OpenWrt:~# iptables -t nat -A POSTROUTING -o eth2.10 -s 10.0.10.0/24 -j MASQUERADE
 
 ```
+
+opkg install vim-fuller
+opkg install mwan3
