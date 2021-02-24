@@ -2,23 +2,23 @@
 . /lib/functions.sh #  load UCI configuration files
 
 # Variables
-ACTION="${1:-start}"
+#ACTION="${1:-start}"
 TC=/usr/sbin/tc
 
 # Functions
 run_traffic_control(){
         local section="$1"
 
-        IFACE=$(config_get "$section" interface) 
+        IFACE=$(config_get "$section" interface) # Lay ra gia tri dau tien sau interface
 
-        IF=$(uci -q get network.${IFACE}.ifname) # lay ra interface vat li
+        IF=$(uci -q get network.${IFACE}.ifname) # Lay ra interface vat li
         if [ $? -eq 1 ]; then
                         #echo "No network config for ${IFACE}"
                         return
         fi
 
 
-        GWIPADDR=$(uci -q get network.${IFACE}.ipaddr)
+        GWIPADDR=$(uci -q get network.${IFACE}.ipaddr) # Lay ra dia chi IP cua interface vat li ${IFACE}
         if [ $? -eq 1 ]; then
                         #echo "No network config for ${IFACE}"
                         return
@@ -38,28 +38,29 @@ run_traffic_control(){
 
         echo $BASEIP.[$START-$END]
 
-        U32="$TC filter replace dev $IF protocol ip parent 1:0 prio 1 u32"
 
         # Use tc tool
-        $TC qdisc add dev $IF root handle 1: htb default 999 > /dev/null 2>&1
-        $TC qdisc add dev $IF handle ffff: ingress > /dev/null 2>&1
-        $TC qdisc add dev ifb$VLAN root handle 1: htb default 10
+	$TC qdisc add dev $IF handle ffff: ingress > /dev/null 2>&1
+	$TC qdisc add dev ifb$VLAN root handle 1: htb default 10 > /dev/null 2>&1
+	$TC qdisc add dev $IF root handle 1: htb default 10 > /dev/null 2>&1 
+	
+	#redirect ingress from physical interface to virtual interface
+  #one for outgoing packets (egress path),
+  #one for incoming packets (ingress path).
+	$TC filter add dev $IF parent ffff: protocol ip u32 match u32 0 0 action mirred egress redirect dev ifb$VLAN > /dev/null 2>&1
 
-        for IP in $(seq $START $END)
-        do
-                IPADDR="$BASEIP.$IP"
+	for i in $(seq $START $END); do
+		IPADDR=$BASEIP.$i
 
-                # Limit bandwidth Download
-                $TC class replace dev $IF parent 1: classid 1:$IP htb rate ${DOWNLOAD}kbit > /dev/null 2>&1
-                $U32 match ip dst $IPADDR/32 flowid 1:$IP > /dev/null 2>&1
+		#Download limit
+		$TC class add dev $IF parent 1:1 classid 1:$i htb rate ${DOWNLOAD}kbit >/dev/null 2>&1 #Add Bandwitch vao Interface 
+		$TC filter add dev $IF protocol ip parent 1: prio 1 u32 match ip dst $IPADDR/32 flowid 1:$i > /dev/null 2>&1 #Match vao dia chi tuong ung 
 
-                # Limit bandwidth Upload
-                $TC filter add dev $IF parent ffff: protocol ip u32 match ip src $IPADDR/32 \
-                    action mirred egress redirect dev ifb$VLAN > /dev/null 2>&1
-                $TC class replace dev ifb$VLAN parent 1:1 classid 1:$IP htb rate ${UPLOAD}kbit > /dev/null 2>&1
-                $TC filter replace dev ifb$VLAN parent 1:0 protocol ip u32 match ip src $IPADDR/32 flowid 1:$IP > /dev/null 2>&1
-        done
-
+		#Upload limit
+		$TC class add dev ifb$VLAN parent 1:1 classid 1:$i htb rate ${UPLOAD}kbit >/dev/null 2>&1
+		$TC filter add dev ifb$VLAN protocol ip parent 1: prio 1 u32 match ip src $IPADDR/32 flowid 1:$i > /dev/null 2>&1
+	done
+	
 }
 
 stop_traffic_control(){
@@ -90,16 +91,16 @@ stop_traffic_control(){
 }
 
 
-# Program 
-config_load throttle #load tu file /etc/config/throttle
-# restart start stop traffic shaping
+# Program
+config_load throttle
+
 case "$1" in
 
   start)
     LIGHTGREEN='\033[1;32m'
     NC='\033[0m'
     echo -n -e "${LIGHTGREEN}Starting bandwidth shaping: \n${NC}"
-    config_foreach run_traffic_control:q # chay ham run_traffic_control
+    config_foreach run_traffic_control
     echo "done"
     ;;
 
@@ -107,7 +108,7 @@ case "$1" in
     LIGHTGREEN='\033[1;32m'
     NC='\033[0m'
     echo -n -e "${LIGHTGREEN}Stopping bandwidth shaping: \n${NC}"
-    config_foreach stop_traffic_control # chay ham stop_traffic_control
+    config_foreach stop_traffic_control
     echo "done"
     ;;
 
