@@ -1,0 +1,23 @@
+#!/bin/bash
+#Author Son Do Xuan
+
+firewall_config_file="/etc/config/firewall"
+
+# ping -w 10 -c 3 10.0.1.4
+dig google.com @10.0.1.4
+if [ $? != 0 ]
+then
+    grep "option dest_ip '10.0.1.4'" $firewall_config_file
+    if [ $? == 0 ]
+    then
+        sed -i "s/option dest_ip '10.0.1.4'/option dest_ip '8.8.8.8'/" $firewall_config_file
+        /etc/init.d/firewall reload
+    fi
+else
+    grep "option dest_ip '8.8.8.8'" $firewall_config_file
+    if [ $? == 0 ]
+    then
+        sed -i "s/option dest_ip '8.8.8.8'/option dest_ip '10.0.1.4'/" $firewall_config_file
+        /etc/init.d/firewall reload
+    fi
+fi

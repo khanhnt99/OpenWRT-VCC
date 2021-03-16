@@ -1,0 +1,7 @@
+* * * * * /root/ha_dns/ha_dns.sh
+
+0 8 * * * /opt/backup-file-config.sh
+
+* * * * * /data/gateway-ui/venv/bin/python /data/gateway-ui/script/update_policy.py 2>> /var/log/web-backend/update-policy.log >> /var/log/web-backend/update-policy.log
+* * * * * /data/gateway-ui/venv/bin/python /data/gateway-ui/script/check_rules_deleted.py 2>> /var/log/web-backend/check-rules-deleted.log >> /var/log/web-backend/check-rules-deleted.log
+0 0 * * * /data/gateway-ui/venv/bin/python /data/gateway-ui/script/delete_expired_rules.py 2>> /var/log/web-backend/delete-expired-rules.log >> /var/log/web-backend/delete-expired-rules.log                                                                        

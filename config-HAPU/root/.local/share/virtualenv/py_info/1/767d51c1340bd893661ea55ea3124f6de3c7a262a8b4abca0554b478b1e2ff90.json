@@ -1,0 +1,68 @@
+{
+  "content": {
+    "_creators": null, 
+    "architecture": 64, 
+    "base_exec_prefix": null, 
+    "base_prefix": null, 
+    "distutils_install": {
+      "data": "", 
+      "headers": "include/python2.7/UNKNOWN", 
+      "platlib": "lib/python2.7/site-packages", 
+      "purelib": "lib/python2.7/site-packages", 
+      "scripts": "bin"
+    }, 
+    "exec_prefix": "/usr", 
+    "executable": "/usr/bin/python", 
+    "file_system_encoding": "UTF-8", 
+    "has_venv": false, 
+    "implementation": "CPython", 
+    "max_size": 9223372036854775807, 
+    "original_executable": "/usr/bin/python", 
+    "os": "posix", 
+    "path": [
+      "/usr/lib/python2.7/site-packages/virtualenv/discovery", 
+      "/usr/lib/python27.zip", 
+      "/usr/lib/python2.7", 
+      "/usr/lib/python2.7/plat-linux2", 
+      "/usr/lib/python2.7/lib-tk", 
+      "/usr/lib/python2.7/lib-old", 
+      "/usr/lib/python2.7/lib-dynload", 
+      "/usr/lib/python2.7/site-packages"
+    ], 
+    "platform": "linux2", 
+    "prefix": "/usr", 
+    "real_prefix": null, 
+    "stdout_encoding": null, 
+    "sysconfig": {
+      "makefile_filename": "/usr/lib/python2.7/config/Makefile"
+    }, 
+    "sysconfig_paths": {
+      "data": "{base}", 
+      "include": "{base}/include/python{py_version_short}", 
+      "platlib": "{platbase}/lib/python{py_version_short}/site-packages", 
+      "platstdlib": "{platbase}/lib/python{py_version_short}", 
+      "purelib": "{base}/lib/python{py_version_short}/site-packages", 
+      "scripts": "{base}/bin", 
+      "stdlib": "{base}/lib/python{py_version_short}"
+    }, 
+    "sysconfig_vars": {
+      "PYTHONFRAMEWORK": "", 
+      "base": "/usr", 
+      "platbase": "/usr", 
+      "py_version_short": "2.7"
+    }, 
+    "system_executable": "/usr/bin/python", 
+    "system_stdlib": "/usr/lib/python2.7", 
+    "system_stdlib_platform": "/usr/lib/python2.7", 
+    "version": "2.7.16 (default, Jul 31 2019, 14:54:50) \n[GCC 7.3.0]", 
+    "version_info": {
+      "major": 2, 
+      "micro": 16, 
+      "minor": 7, 
+      "releaselevel": "final", 
+      "serial": 0
+    }
+  }, 
+  "path": "/usr/bin/python", 
+  "st_mtime": 1564688039.0
+}

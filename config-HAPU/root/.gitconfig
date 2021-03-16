@@ -1,0 +1,7 @@
+[user]
+	name = hapugateway@vccorp.vn
+	password = P8dzbYWzdkEsjzUoXhpb
+	email = hapugateway@vccorp.vn
+[credential]
+	helper = store
+	helper = cache --timeout=31536000

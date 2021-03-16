@@ -1,0 +1,22 @@
+
+config system 'system_1'
+	option cronloglevel '8'
+	option log_ip '103.69.194.171'
+	option log_port '516'
+	option log_prefix 'VTB3930'
+	option log_proto 'tcp'
+	option log_size '64'
+	option timezone 'ICT-7'
+	option ttylogin '0'
+	option urandom_seed '0'
+	option zonename 'Asia/Ho Chi Minh'
+	option conloglevel '7'
+	option hostname 'Hapu-GW-Master'
+
+config timeserver 'ntp'
+	option enabled '1'
+	list server '0.lede.pool.ntp.org'
+	list server '1.lede.pool.ntp.org'
+	list server '2.lede.pool.ntp.org'
+	list server '3.lede.pool.ntp.org'
+

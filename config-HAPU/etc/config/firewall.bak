@@ -1,0 +1,5402 @@
+
+config defaults 'defaults_1'
+	option forward 'REJECT'
+	option input 'ACCEPT'
+	option output 'ACCEPT'
+	option syn_flood '1'
+	option drop_invalid '1'
+
+config zone 'zone_2'
+	option forward 'ACCEPT'
+	option input 'ACCEPT'
+	option name 'lan'
+	option output 'ACCEPT'
+	option network 'lan_10 lan_11 lan_19 lan_20 lan_21 lan_22 lan_24 lan_25 lan_40 lan_42 lan_44 lan_17 lan_18 lan_222 lan_223 lan_224 lan_59 lan_60 lan_26 lan_27 lan_28 lan_29 lan_30 lan_31 lan_32 lan_33 lan_34 lan_35 lan_36 lan_37 lan_38 lan_39 lan_41 lan_48 lan_49 lan_50 lan_51 lan_52 lan_53 lan_54 lan_55 lan_56 lan_57 lan_58 lan_63 lan_65'
+
+config zone 'zone_3'
+	option forward 'REJECT'
+	option input 'REJECT'
+	option masq '1'
+	option mtu_fix '1'
+	option name 'wan'
+	option output 'ACCEPT'
+	option network 'wan_100 wan_104 wan_108 wan_124 wan_125 wan_126 wan_129 wan_102 wan_101 wan_122 wan_127 wan_128 wan_106 wan_109 wan_130 wan_103 wan_107 wan_131 wan_132 wan_133 wan_110 wan_111 wan_112 wan_505 wan_507 wan_508 wan_509 wan_105 wan_118 wan_119 wan_200 wan_123 wan_212 wan_210'
+
+config rule 'rule_5'
+	option dest_port '68'
+	option family 'ipv4'
+	option icmp_type 'echo-request'
+	option name 'Allow-Ping'
+	option proto 'icmp'
+	option src 'wan'
+	option target 'ACCEPT'
+
+config rule 'rule_6'
+	option family 'ipv4'
+	option icmp_type 'echo-request'
+	option name 'Allow-IGMP'
+	option proto 'igmp'
+	option src 'wan'
+	option target 'ACCEPT'
+
+config rule 'rule_7'
+	option dest_ip 'fc00::/6'
+	option dest_port '546'
+	option family 'ipv6'
+	option name 'Allow-DHCPv6'
+	option proto 'udp'
+	option src 'wan'
+	option src_ip 'fc00::/6'
+	option target 'ACCEPT'
+
+config rule 'rule_8'
+	option dest_ip 'fc00::/6'
+	option dest_port '546'
+	option family 'ipv6'
+	list icmp_type '130/0'
+	list icmp_type '131/0'
+	list icmp_type '132/0'
+	list icmp_type '143/0'
+	list icmp_type '130/0'
+	list icmp_type '131/0'
+	list icmp_type '132/0'
+	list icmp_type '143/0'
+	option name 'Allow-MLD'
+	option proto 'icmp'
+	option src 'wan'
+	option src_ip 'fe80::/10'
+	option target 'ACCEPT'
+
+config rule 'rule_9'
+	option family 'ipv6'
+	list icmp_type '130/0'
+	list icmp_type '131/0'
+	list icmp_type '132/0'
+	list icmp_type '143/0'
+	list icmp_type 'echo-request'
+	list icmp_type 'echo-reply'
+	list icmp_type 'destination-unreachable'
+	list icmp_type 'packet-too-big'
+	list icmp_type 'time-exceeded'
+	list icmp_type 'bad-header'
+	list icmp_type 'unknown-header-type'
+	list icmp_type 'router-solicitation'
+	list icmp_type 'neighbour-solicitation'
+	list icmp_type 'router-advertisement'
+	list icmp_type 'neighbour-advertisement'
+	list icmp_type 'echo-request'
+	list icmp_type 'echo-reply'
+	list icmp_type 'destination-unreachable'
+	list icmp_type 'packet-too-big'
+	list icmp_type 'time-exceeded'
+	list icmp_type 'bad-header'
+	list icmp_type 'unknown-header-type'
+	list icmp_type 'router-solicitation'
+	list icmp_type 'neighbour-solicitation'
+	list icmp_type 'router-advertisement'
+	list icmp_type 'neighbour-advertisement'
+	option limit '1000/sec'
+	option name 'Allow-ICMPv6-Input'
+	option proto 'icmp'
+	option src 'wan'
+	option src_ip 'fe80::/10'
+	option target 'ACCEPT'
+
+config rule 'rule_10'
+	option dest '*'
+	option family 'ipv6'
+	list icmp_type 'echo-request'
+	list icmp_type 'echo-reply'
+	list icmp_type 'destination-unreachable'
+	list icmp_type 'packet-too-big'
+	list icmp_type 'time-exceeded'
+	list icmp_type 'bad-header'
+	list icmp_type 'unknown-header-type'
+	list icmp_type 'router-solicitation'
+	list icmp_type 'neighbour-solicitation'
+	list icmp_type 'router-advertisement'
+	list icmp_type 'neighbour-advertisement'
+	list icmp_type 'echo-request'
+	list icmp_type 'echo-reply'
+	list icmp_type 'destination-unreachable'
+	list icmp_type 'packet-too-big'
+	list icmp_type 'time-exceeded'
+	list icmp_type 'bad-header'
+	list icmp_type 'unknown-header-type'
+	list icmp_type 'echo-request'
+	list icmp_type 'echo-reply'
+	list icmp_type 'destination-unreachable'
+	list icmp_type 'packet-too-big'
+	list icmp_type 'time-exceeded'
+	list icmp_type 'bad-header'
+	list icmp_type 'unknown-header-type'
+	option limit '1000/sec'
+	option name 'Allow-ICMPv6-Forward'
+	option proto 'icmp'
+	option src 'wan'
+	option target 'ACCEPT'
+
+config rule 'rule_11'
+	option dest 'lan'
+	option family 'ipv6'
+	list icmp_type 'echo-request'
+	list icmp_type 'echo-reply'
+	list icmp_type 'destination-unreachable'
+	list icmp_type 'packet-too-big'
+	list icmp_type 'time-exceeded'
+	list icmp_type 'bad-header'
+	list icmp_type 'unknown-header-type'
+	option limit '1000/sec'
+	option name 'Allow-IPSec-ESP'
+	option proto 'esp'
+	option src 'wan'
+	option target 'ACCEPT'
+
+config rule 'rule_12'
+	option dest 'lan'
+	option dest_port '500'
+	option name 'Allow-ISAKMP'
+	option proto 'udp'
+	option src 'wan'
+	option target 'ACCEPT'
+
+config rule 'rule_14'
+	option dest_port '22'
+	option name 'inc_SSH'
+	option proto 'tcp'
+	option src 'wan'
+	option target 'ACCEPT'
+
+config zone 'zone_22'
+	option forward 'ACCEPT'
+	option input 'ACCEPT'
+	option name 'vpn_vccloud'
+	option network 'VPN'
+	option output 'ACCEPT'
+
+config rule 'rule_4'
+	option dest_port '68'
+	option family 'ipv4'
+	option name 'Allow-DHCP-Renew'
+	option proto 'udp'
+	option src 'wan'
+	option target 'ACCEPT'
+
+config include 'include_13'
+	option path '/etc/firewall.user'
+
+config forwarding 'forwarding_27'
+	option dest 'wan'
+	option src 'lan'
+
+config forwarding 'forwarding_28'
+	option dest 'lan'
+	option src 'vpn_vccloud'
+
+config forwarding 'forwarding_29'
+	option dest 'vpn_vccloud'
+	option src 'lan'
+
+config ipset
+	option external 'ipset_BlockIP'
+	option match 'dest_net'
+	option storage 'hash'
+	option enabled '1'
+
+config rule 'rule_30a'
+	option ipset 'ipset_BlockIP'
+	option name 'blockIP'
+	option src '*'
+	option dest 'wan'
+	option target 'REJECT'
+	option proto 'all'
+
+config rule 'rule_39'
+	option dest 'wan'
+	option dest_ip '206.219.65.0/24'
+	option name 'out_65'
+	option src '*'
+	option target 'REJECT'
+
+config rule 'rule_40'
+	option dest 'wan'
+	option dest_ip '206.219.66.0/24'
+	option name 'out_66'
+	option src '*'
+	option target 'REJECT'
+
+config rule 'rule_41'
+	option dest 'wan'
+	option dest_ip '206.219.67.0/24'
+	option name 'out_67'
+	option src '*'
+	option target 'REJECT'
+
+config rule 'rule_42'
+	option dest 'wan'
+	option dest_ip '206.219.68.0/24'
+	option name 'out_68'
+	option src '*'
+	option target 'REJECT'
+
+config rule 'rule_43'
+	option dest 'wan'
+	option dest_ip '206.219.69.0/24'
+	option name 'out_69'
+	option src '*'
+	option target 'REJECT'
+
+config rule 'rule_44'
+	option dest 'wan'
+	option dest_ip '206.219.70.0/24'
+	option name 'out_70'
+	option src '*'
+	option target 'REJECT'
+
+config rule 'rule_45'
+	option dest 'wan'
+	option dest_ip '206.219.71.0/24'
+	option name 'out_71'
+	option src '*'
+	option target 'REJECT'
+
+config rule 'rule_46'
+	option dest 'wan'
+	option dest_ip '206.219.72.0/24'
+	option name 'out_72'
+	option src '*'
+	option target 'REJECT'
+
+config rule 'rule_47'
+	option dest 'wan'
+	option dest_ip '206.219.73.0/24'
+	option name 'out_73'
+	option src '*'
+	option target 'REJECT'
+
+config rule 'rule_48'
+	option dest 'wan'
+	option dest_ip '206.219.74.0/24'
+	option name 'out_74'
+	option src '*'
+	option target 'REJECT'
+
+config rule 'rule_49'
+	option dest 'wan'
+	option dest_ip '206.219.75.0/24'
+	option name 'out_75'
+	option src '*'
+	option target 'REJECT'
+
+config rule 'rule_50'
+	option dest 'wan'
+	option dest_ip '206.219.76.0/24'
+	option name 'out_76'
+	option src '*'
+	option target 'REJECT'
+
+config rule 'rule_51'
+	option dest 'wan'
+	option dest_ip '206.219.77.0/24'
+	option name 'out_77'
+	option src '*'
+	option target 'REJECT'
+
+config rule 'rule_52'
+	option dest 'wan'
+	option dest_ip '206.219.78.0/24'
+	option name 'out_78'
+	option src '*'
+	option target 'REJECT'
+
+config rule 'rule_53'
+	option dest 'wan'
+	option dest_ip '206.219.79.0/24'
+	option name 'out_79'
+	option src '*'
+	option target 'REJECT'
+
+config rule 'rule_54'
+	option dest 'wan'
+	option dest_ip '206.219.80.0/24'
+	option name 'out_80'
+	option src '*'
+	option target 'REJECT'
+
+config rule 'rule_55'
+	option dest 'wan'
+	option dest_ip '206.219.81.0/24'
+	option name 'out_81'
+	option src '*'
+	option target 'REJECT'
+
+config rule 'rule_56'
+	option dest 'wan'
+	option dest_ip '206.219.82.0/24'
+	option name 'out_82'
+	option src '*'
+	option target 'REJECT'
+
+config rule 'rule_57'
+	option dest 'wan'
+	option dest_ip '206.219.83.0/24'
+	option name 'out_83'
+	option src '*'
+	option target 'REJECT'
+
+config rule 'rule_58'
+	option dest 'wan'
+	option dest_ip '206.219.84.0/24'
+	option name 'out_84'
+	option src '*'
+	option target 'REJECT'
+
+config rule 'rule_59'
+	option dest 'wan'
+	option dest_ip '206.219.85.0/24'
+	option name 'out_85'
+	option src '*'
+	option target 'REJECT'
+
+config rule 'rule_60'
+	option dest 'wan'
+	option dest_ip '206.219.86.0/24'
+	option name 'out_86'
+	option src '*'
+	option target 'REJECT'
+
+config rule 'rule_61'
+	option dest 'wan'
+	option dest_ip '206.219.87.0/24'
+	option name 'out_87'
+	option src '*'
+	option target 'REJECT'
+
+config rule 'rule_62'
+	option dest 'wan'
+	option dest_ip '206.219.88.0/24'
+	option name 'out_88'
+	option src '*'
+	option target 'REJECT'
+
+config rule 'rule_63'
+	option dest 'wan'
+	option dest_ip '206.219.89.0/24'
+	option name 'out_89'
+	option src '*'
+	option target 'REJECT'
+
+config rule 'rule_64'
+	option dest 'wan'
+	option dest_ip '206.219.90.0/24'
+	option name 'out_90'
+	option src '*'
+	option target 'REJECT'
+
+config rule 'rule_65'
+	option dest 'wan'
+	option dest_ip '38.132.124.250'
+	option name 'out_250'
+	option src '*'
+	option target 'REJECT'
+
+config rule 'rule_66'
+	option dest 'wan'
+	option dest_ip '89.249.65.220'
+	option name 'out_220'
+	option src '*'
+	option target 'REJECT'
+
+config rule 'rule_72'
+	option dest 'wan'
+	option dest_ip '31.3.232.109'
+	option name 'out_109'
+	option proto 'all'
+	option src '*'
+	option target 'REJECT'
+
+config rule 'rule_79'
+	option dest 'wan'
+	option dest_ip '58.64.209.84'
+	option name 'out_58.64.209.84'
+	option src '*'
+	option target 'DROP'
+
+config rule 'rule_82'
+	option dest 'wan'
+	option dest_ip '180.150.226.18'
+	option name 'out_180.150.226.18'
+	option src '*'
+	option target 'DROP'
+
+config rule 'rule_83'
+	option dest 'wan'
+	option dest_ip '123.1.170.204'
+	option name 'out_123.1.170.204'
+	option src '*'
+	option target 'DROP'
+
+config rule
+	option target 'ACCEPT'
+	option src 'wan'
+	option dest_port '1194'
+	option name 'VPN21T2'
+	option proto 'tcp udp'
+
+config zone
+	option input 'ACCEPT'
+	option output 'ACCEPT'
+	option name 'VPN2'
+	option forward 'ACCEPT'
+	option network 'VPN1'
+
+config forwarding
+	option dest 'lan'
+	option src 'VPN2'
+
+config rule
+	option name '188.241.58.68:80'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '188.241.58.68'
+	option dest_port '80'
+	option target 'DROP'
+
+config rule
+	option name '188.166.92.212:80'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '188.166.92.212'
+	option dest_port '80'
+	option target 'DROP'
+
+config rule
+	option name '80.211.217.149:80'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '80.211.217.149'
+	option dest_port '80'
+	option target 'DROP'
+
+config rule
+	option name '1.54.140.167'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '1.54.140.167'
+	option target 'DROP'
+
+config rule
+	option name '171.235.136.147'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '171.235.136.147'
+	option target 'DROP'
+
+config rule
+	option name '1.54.140.167'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '1.54.140.167'
+	option target 'DROP'
+
+config rule
+	option name '171.235.136.147'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '171.235.136.147'
+	option target 'DROP'
+
+config rule
+	option name '14.183.130.87'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '14.183.130.87'
+	option target 'DROP'
+
+config rule
+	option name '1.52.0.147'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '1.52.0.147'
+	option target 'DROP'
+
+config rule
+	option name '42.119.44.109'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '42.119.44.109'
+	option target 'DROP'
+
+config rule
+	option name '42.112.220.2'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '42.112.220.2'
+	option target 'DROP'
+
+config rule
+	option name '14.181.118.183'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '14.181.118.183'
+	option target 'DROP'
+
+config rule
+	option name '115.73.138.158'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '115.73.138.158'
+	option target 'DROP'
+
+config rule
+	option name '27.78.159.41'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '27.78.159.41'
+	option target 'DROP'
+
+config rule
+	option name '1.52.84.243'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '1.52.84.243'
+	option target 'DROP'
+
+config rule
+	option name '1.52.151.163'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '1.52.151.163'
+	option target 'DROP'
+
+config rule
+	option name '14.249.139.35'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '14.249.139.35'
+	option target 'DROP'
+
+config rule
+	option name '171.243.157.81'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '171.243.157.81'
+	option target 'DROP'
+
+config rule
+	option name '14.248.178.177'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '14.248.178.177'
+	option target 'DROP'
+
+config rule
+	option name '14.164.211.26'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '14.164.211.26'
+	option target 'DROP'
+
+config rule
+	option name '27.77.189.133'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '27.77.189.133'
+	option target 'DROP'
+
+config rule
+	option name '42.113.138.122'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '42.113.138.122'
+	option target 'DROP'
+
+config rule
+	option name '115.76.246.173'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '115.76.246.173'
+	option target 'DROP'
+
+config rule
+	option name '14.186.172.102'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '14.186.172.102'
+	option target 'DROP'
+
+config rule
+	option name '115.77.234.225'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '115.77.234.225'
+	option target 'DROP'
+
+config rule
+	option name '42.117.62.88'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '42.117.62.88'
+	option target 'DROP'
+
+config rule
+	option name '58.187.241.167'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '58.187.241.167'
+	option target 'DROP'
+
+config rule
+	option name '171.251.163.150'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '171.251.163.150'
+	option target 'DROP'
+
+config rule
+	option name '14.162.173.28'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '14.162.173.28'
+	option target 'DROP'
+
+config rule
+	option name '116.110.250.244'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '116.110.250.244'
+	option target 'DROP'
+
+config rule
+	option name '1.55.125.149'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '1.55.125.149'
+	option target 'DROP'
+
+config rule
+	option name '14.183.202.106'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '14.183.202.106'
+	option target 'DROP'
+
+config rule
+	option name '125.212.218.78'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '125.212.218.78'
+	option target 'DROP'
+
+config rule
+	option name '118.68.40.184'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '118.68.40.184'
+	option target 'DROP'
+
+config rule
+	option name '115.146.126.151'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '115.146.126.151'
+	option target 'DROP'
+
+config rule
+	option name '112.78.2.71'
+	option src '*'
+	option dest_ip '112.78.2.71'
+	option dest 'wan'
+	option target 'ACCEPT'
+
+config rule
+	option name '112.137.129.15'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '112.137.129.15'
+	option target 'DROP'
+
+config rule
+	option name '45.252.248.10'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '45.252.248.10'
+	option target 'DROP'
+
+config rule
+	option name '210.211.111.86'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '210.211.111.86'
+	option target 'DROP'
+
+config rule
+	option name '45.252.248.20'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '45.252.248.20'
+	option target 'DROP'
+
+config rule
+	option name '210.211.99.239'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '210.211.99.239'
+	option target 'DROP'
+
+config rule
+	option name '112.78.2.149'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '112.78.2.149'
+	option target 'DROP'
+
+config rule
+	option name '45.252.248.18'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '45.252.248.18'
+	option target 'DROP'
+
+config rule
+	option name '115.146.122.250'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '115.146.122.250'
+	option target 'DROP'
+
+config rule
+	option name '103.28.39.57'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.28.39.57'
+	option target 'DROP'
+
+config rule
+	option name '123.30.187.223'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '123.30.187.223'
+	option target 'DROP'
+
+config rule
+	option name '42.112.30.99'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '42.112.30.99'
+	option target 'DROP'
+
+config rule
+	option name '103.226.248.36'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.226.248.36'
+	option target 'DROP'
+
+config rule
+	option name '103.18.7.157'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.18.7.157'
+	option target 'DROP'
+
+config rule
+	option name '103.82.32.44'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.82.32.44'
+	option target 'DROP'
+
+config rule
+	option name '103.74.123.12'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.74.123.12'
+	option target 'DROP'
+
+config rule
+	option name '112.78.2.183'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '112.78.2.183'
+	option target 'DROP'
+
+config rule
+	option name '45.252.251.8'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '45.252.251.8'
+	option target 'DROP'
+
+config rule
+	option name '103.221.220.11'
+	option src '*'
+	option dest_ip '103.221.220.11'
+	option dest 'wan'
+	option target 'ACCEPT'
+
+config rule
+	option name '103.221.220.21'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.221.220.21'
+	option target 'DROP'
+
+config rule
+	option name '103.101.160.77'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.101.160.77'
+	option target 'DROP'
+
+config rule
+	option name '115.146.122.229'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '115.146.122.229'
+	option target 'DROP'
+
+config rule
+	option name '112.213.89.123'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '112.213.89.123'
+	option target 'DROP'
+
+config rule
+	option name '210.245.90.206'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '210.245.90.206'
+	option target 'DROP'
+
+config rule
+	option name '103.18.6.211'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.18.6.211'
+	option target 'DROP'
+
+config rule
+	option name '103.48.81.8'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.48.81.8'
+	option target 'DROP'
+
+config rule
+	option name '112.78.2.48'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '112.78.2.48'
+	option target 'DROP'
+
+config rule
+	option name '118.69.81.118'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '118.69.81.118'
+	option target 'DROP'
+
+config rule
+	option name '210.245.86.41'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '210.245.86.41'
+	option target 'DROP'
+
+config rule
+	option name '45.117.76.138'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '45.117.76.138'
+	option target 'DROP'
+
+config rule
+	option name '115.84.182.189'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '115.84.182.189'
+	option target 'DROP'
+
+config rule
+	option name '112.78.2.75'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '112.78.2.75'
+	option target 'DROP'
+
+config rule
+	option name '103.18.6.132'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.18.6.132'
+	option target 'DROP'
+
+config rule
+	option name '125.234.237.55'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '125.234.237.55'
+	option target 'DROP'
+
+config rule
+	option name '210.245.87.248'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '210.245.87.248'
+	option target 'DROP'
+
+config rule
+	option name '163.44.206.45'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '163.44.206.45'
+	option target 'DROP'
+
+config rule
+	option name '115.146.121.174'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '115.146.121.174'
+	option target 'DROP'
+
+config rule
+	option name '150.95.110.240'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '150.95.110.240'
+	option target 'DROP'
+
+config rule
+	option name '45.124.84.20'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '45.124.84.20'
+	option target 'DROP'
+
+config rule
+	option name '112.78.2.241'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '112.78.2.241'
+	option target 'DROP'
+
+config rule
+	option name '125.253.124.92'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '125.253.124.92'
+	option target 'DROP'
+
+config rule
+	option name '125.253.125.119'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '125.253.125.119'
+	option target 'DROP'
+
+config rule
+	option name '119.17.253.67'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '119.17.253.67'
+	option target 'DROP'
+
+config rule
+	option name '222.255.167.54'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '222.255.167.54'
+	option target 'DROP'
+
+config rule
+	option name '27.118.20.236'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '27.118.20.236'
+	option target 'DROP'
+
+config rule
+	option name '115.146.127.39'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '115.146.127.39'
+	option target 'DROP'
+
+config rule
+	option name '61.14.235.149'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '61.14.235.149'
+	option target 'DROP'
+
+config rule
+	option name '202.92.4.34'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '202.92.4.34'
+	option target 'DROP'
+
+config rule
+	option name '210.211.125.200'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '210.211.125.200'
+	option target 'DROP'
+
+config rule
+	option name '112.78.10.7'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '112.78.10.7'
+	option target 'DROP'
+
+config rule
+	option name '103.90.232.147'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.90.232.147'
+	option target 'DROP'
+
+config rule
+	option name '202.92.4.46'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '202.92.4.46'
+	option target 'DROP'
+
+config rule
+	option name '163.44.206.165'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '163.44.206.165'
+	option target 'DROP'
+
+config rule
+	option name '45.252.248.22'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '45.252.248.22'
+	option target 'DROP'
+
+config rule
+	option name '115.78.2.31'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '115.78.2.31'
+	option target 'DROP'
+
+config rule
+	option name '103.48.83.141'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.48.83.141'
+	option target 'DROP'
+
+config rule
+	option name '210.245.90.216'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '210.245.90.216'
+	option target 'DROP'
+
+config rule
+	option name '103.3.245.16'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.3.245.16'
+	option target 'DROP'
+
+config rule
+	option name '203.119.8.107'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '203.119.8.107'
+	option target 'DROP'
+
+config rule
+	option name '45.252.249.143'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '45.252.249.143'
+	option target 'DROP'
+
+config rule
+	option name '115.84.182.210'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '115.84.182.210'
+	option target 'DROP'
+
+config rule
+	option name '103.28.36.181'
+	option src '*'
+	option dest_ip '103.28.36.181'
+	option dest 'wan'
+	option target 'ACCEPT'
+
+config rule
+	option name '115.84.182.56'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '115.84.182.56'
+	option target 'DROP'
+
+config rule
+	option name '103.28.38.80'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.28.38.80'
+	option target 'DROP'
+
+config rule
+	option name '163.44.193.175'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '163.44.193.175'
+	option target 'DROP'
+
+config rule
+	option name '103.28.36.25'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.28.36.25'
+	option target 'DROP'
+
+config rule
+	option name '45.252.248.14'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '45.252.248.14'
+	option target 'DROP'
+
+config rule
+	option name '45.122.221.235'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '45.122.221.235'
+	option target 'DROP'
+
+config rule
+	option name '210.245.122.169'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '210.245.122.169'
+	option target 'DROP'
+
+config rule
+	option name '45.119.83.245'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '45.119.83.245'
+	option target 'DROP'
+
+config rule
+	option name '103.81.85.177'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.81.85.177'
+	option target 'DROP'
+
+config rule
+	option name '118.69.175.123'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '118.69.175.123'
+	option target 'DROP'
+
+config rule
+	option name '103.18.6.135'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.18.6.135'
+	option target 'DROP'
+
+config rule
+	option name '103.255.237.191'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.255.237.191'
+	option target 'DROP'
+
+config rule
+	option name '112.213.91.61'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '112.213.91.61'
+	option target 'DROP'
+
+config rule
+	option name '103.27.239.16'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.27.239.16'
+	option target 'DROP'
+
+config rule
+	option name '112.213.89.135'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '112.213.89.135'
+	option target 'DROP'
+
+config rule
+	option name '103.57.208.115'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.57.208.115'
+	option target 'DROP'
+
+config rule
+	option name '103.47.192.41'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.47.192.41'
+	option target 'DROP'
+
+config rule
+	option name '42.112.20.111'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '42.112.20.111'
+	option target 'DROP'
+
+config rule
+	option name '45.252.248.165'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '45.252.248.165'
+	option target 'DROP'
+
+config rule
+	option name '103.48.82.122'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.48.82.122'
+	option target 'DROP'
+
+config rule
+	option name '203.113.135.195'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '203.113.135.195'
+	option target 'DROP'
+
+config rule
+	option name '123.30.183.139'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '123.30.183.139'
+	option target 'DROP'
+
+config rule
+	option name '203.162.13.105'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '203.162.13.105'
+	option target 'DROP'
+
+config rule
+	option name '103.18.4.252'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.18.4.252'
+	option target 'DROP'
+
+config rule
+	option name '45.119.83.54'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '45.119.83.54'
+	option target 'DROP'
+
+config rule
+	option name '45.119.83.57'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '45.119.83.57'
+	option target 'DROP'
+
+config rule
+	option name '103.57.222.17'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.57.222.17'
+	option target 'DROP'
+
+config rule
+	option name '112.213.89.2'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '112.213.89.2'
+	option target 'DROP'
+
+config rule
+	option name '61.14.237.7'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '61.14.237.7'
+	option target 'DROP'
+
+config rule
+	option name '103.28.38.31'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.28.38.31'
+	option target 'DROP'
+
+config rule
+	option name '221.132.34.144'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '221.132.34.144'
+	option target 'DROP'
+
+config rule
+	option name '103.74.121.28'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.74.121.28'
+	option target 'DROP'
+
+config rule
+	option name '171.244.17.116'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '171.244.17.116'
+	option target 'DROP'
+
+config rule
+	option name '103.18.6.169'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.18.6.169'
+	option target 'DROP'
+
+config rule
+	option name '202.92.7.103'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '202.92.7.103'
+	option target 'DROP'
+
+config rule
+	option name '150.95.110.245'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '150.95.110.245'
+	option target 'DROP'
+
+config rule
+	option name '125.212.221.96'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '125.212.221.96'
+	option target 'DROP'
+
+config rule
+	option name '203.113.174.46'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '203.113.174.46'
+	option target 'DROP'
+
+config rule
+	option name '103.92.25.109'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.92.25.109'
+	option target 'DROP'
+
+config rule
+	option name '103.57.222.8'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.57.222.8'
+	option target 'DROP'
+
+config rule
+	option name '103.90.220.97'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.90.220.97'
+	option target 'DROP'
+
+config rule
+	option name '103.28.36.213'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.28.36.213'
+	option target 'DROP'
+
+config rule
+	option name '112.78.3.57'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '112.78.3.57'
+	option target 'DROP'
+
+config rule
+	option name '171.244.10.25'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '171.244.10.25'
+	option target 'DROP'
+
+config rule
+	option name '103.101.160.233'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.101.160.233'
+	option target 'DROP'
+
+config rule
+	option name '103.255.237.120'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.255.237.120'
+	option target 'DROP'
+
+config rule
+	option name '103.9.159.115'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.9.159.115'
+	option target 'DROP'
+
+config rule
+	option name '103.18.6.166'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.18.6.166'
+	option target 'DROP'
+
+config rule
+	option name '42.112.27.249'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '42.112.27.249'
+	option target 'DROP'
+
+config rule
+	option name '103.53.168.40'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.53.168.40'
+	option target 'DROP'
+
+config rule
+	option name '125.212.248.160'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '125.212.248.160'
+	option target 'DROP'
+
+config rule
+	option name '171.244.1.74'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '171.244.1.74'
+	option target 'DROP'
+
+config rule
+	option name '45.124.95.77'
+	option src '*'
+	option dest_ip '45.124.95.77'
+	option dest 'wan'
+	option target 'ACCEPT'
+
+config rule
+	option name '202.92.5.157'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '202.92.5.157'
+	option target 'DROP'
+
+config rule
+	option name '61.14.235.74'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '61.14.235.74'
+	option target 'DROP'
+
+config rule
+	option name '163.44.192.170'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '163.44.192.170'
+	option target 'DROP'
+
+config rule
+	option name '202.92.4.167'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '202.92.4.167'
+	option target 'DROP'
+
+config rule
+	option name '103.1.236.162'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.1.236.162'
+	option target 'DROP'
+
+config rule
+	option name '103.255.237.180'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.255.237.180'
+	option target 'DROP'
+
+config rule
+	option name '118.69.183.55'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '118.69.183.55'
+	option target 'DROP'
+
+config rule
+	option name '103.18.6.212'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.18.6.212'
+	option target 'DROP'
+
+config rule
+	option name '112.213.91.7'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '112.213.91.7'
+	option target 'DROP'
+
+config rule
+	option name '42.116.23.231'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '42.116.23.231'
+	option target 'DROP'
+
+config rule
+	option name '112.78.2.171'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '112.78.2.171'
+	option target 'DROP'
+
+config rule
+	option name '103.48.80.212'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.48.80.212'
+	option target 'DROP'
+
+config rule
+	option name '112.213.95.179'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '112.213.95.179'
+	option target 'DROP'
+
+config rule
+	option name '112.213.89.90'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '112.213.89.90'
+	option target 'DROP'
+
+config rule
+	option name '103.229.192.217'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.229.192.217'
+	option target 'DROP'
+
+config rule
+	option name '210.245.86.47'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '210.245.86.47'
+	option target 'DROP'
+
+config rule
+	option name '103.27.238.31'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.27.238.31'
+	option target 'DROP'
+
+config rule
+	option name '210.211.97.225'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '210.211.97.225'
+	option target 'DROP'
+
+config rule
+	option name '103.48.82.73'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.48.82.73'
+	option target 'DROP'
+
+config rule
+	option name '27.0.14.98'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '27.0.14.98'
+	option target 'DROP'
+
+config rule
+	option name '103.28.38.22'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.28.38.22'
+	option target 'DROP'
+
+config rule
+	option name '45.122.220.220'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '45.122.220.220'
+	option target 'DROP'
+
+config rule
+	option name '103.221.222.194'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.221.222.194'
+	option target 'DROP'
+
+config rule
+	option name '103.18.6.56'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.18.6.56'
+	option target 'DROP'
+
+config rule
+	option name '103.254.12.53'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.254.12.53'
+	option target 'DROP'
+
+config rule
+	option name '222.255.146.83'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '222.255.146.83'
+	option target 'DROP'
+
+config rule
+	option name '222.255.41.195'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '222.255.41.195'
+	option target 'DROP'
+
+config rule
+	option name '112.78.11.146'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '112.78.11.146'
+	option target 'DROP'
+
+config rule
+	option name '103.92.24.130'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.92.24.130'
+	option target 'DROP'
+
+config rule
+	option name '112.78.2.181'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '112.78.2.181'
+	option target 'DROP'
+
+config rule
+	option name '171.244.34.167'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '171.244.34.167'
+	option target 'DROP'
+
+config rule
+	option name '163.44.194.46'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '163.44.194.46'
+	option target 'DROP'
+
+config rule
+	option name '45.118.148.46'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '45.118.148.46'
+	option target 'DROP'
+
+config rule
+	option name '45.117.170.152'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '45.117.170.152'
+	option target 'DROP'
+
+config rule
+	option name '112.213.89.67'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '112.213.89.67'
+	option target 'DROP'
+
+config rule
+	option name '115.146.122.245'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '115.146.122.245'
+	option target 'DROP'
+
+config rule
+	option name '45.117.163.135'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '45.117.163.135'
+	option target 'DROP'
+
+config rule
+	option name '112.78.8.179'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '112.78.8.179'
+	option target 'DROP'
+
+config rule
+	option name '112.213.89.75'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '112.213.89.75'
+	option target 'DROP'
+
+config rule
+	option name '210.245.86.60'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '210.245.86.60'
+	option target 'DROP'
+
+config rule
+	option name '123.31.27.73'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '123.31.27.73'
+	option target 'DROP'
+
+config rule
+	option name '103.1.239.18'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.1.239.18'
+	option target 'DROP'
+
+config rule
+	option name '103.27.62.141'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.27.62.141'
+	option target 'DROP'
+
+config rule
+	option name '103.90.220.32'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.90.220.32'
+	option target 'DROP'
+
+config rule
+	option name '14.232.213.61'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '14.232.213.61'
+	option target 'DROP'
+
+config rule
+	option name '203.162.120.32'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '203.162.120.32'
+	option target 'DROP'
+
+config rule
+	option name '103.74.119.94'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.74.119.94'
+	option target 'DROP'
+
+config rule
+	option name '125.253.121.68'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '125.253.121.68'
+	option target 'DROP'
+
+config rule
+	option name '112.213.89.119'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '112.213.89.119'
+	option target 'DROP'
+
+config rule
+	option name '103.28.36.155'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.28.36.155'
+	option target 'DROP'
+
+config rule
+	option name '103.18.6.55'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.18.6.55'
+	option target 'DROP'
+
+config rule
+	option name '123.30.210.156'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '123.30.210.156'
+	option target 'DROP'
+
+config rule
+	option name '210.211.125.203'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '210.211.125.203'
+	option target 'DROP'
+
+config rule
+	option name '171.244.4.181'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '171.244.4.181'
+	option target 'DROP'
+
+config rule
+	option name '210.211.121.209'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '210.211.121.209'
+	option target 'DROP'
+
+config rule
+	option name '42.112.21.212'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '42.112.21.212'
+	option target 'DROP'
+
+config rule
+	option name '203.162.13.11'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '203.162.13.11'
+	option target 'DROP'
+
+config rule
+	option name '103.45.229.80'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.45.229.80'
+	option target 'DROP'
+
+config rule
+	option name '123.31.41.35'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '123.31.41.35'
+	option target 'DROP'
+
+config rule
+	option name '45.117.170.73'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '45.117.170.73'
+	option target 'DROP'
+
+config rule
+	option name '115.146.122.237'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '115.146.122.237'
+	option target 'DROP'
+
+config rule
+	option name '125.253.112.157'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '125.253.112.157'
+	option target 'DROP'
+
+config rule
+	option name '210.211.113.144'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '210.211.113.144'
+	option target 'DROP'
+
+config rule
+	option name '115.146.127.60'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '115.146.127.60'
+	option target 'DROP'
+
+config rule
+	option name '45.122.222.11'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '45.122.222.11'
+	option target 'DROP'
+
+config rule
+	option name '103.48.81.49'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.48.81.49'
+	option target 'DROP'
+
+config rule
+	option name '112.213.89.121'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '112.213.89.121'
+	option target 'DROP'
+
+config rule
+	option name '45.121.163.48'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '45.121.163.48'
+	option target 'DROP'
+
+config rule
+	option name '103.18.6.86'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.18.6.86'
+	option target 'DROP'
+
+config rule
+	option name '27.118.16.9'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '27.118.16.9'
+	option target 'DROP'
+
+config rule
+	option name '112.78.1.235'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '112.78.1.235'
+	option target 'DROP'
+
+config rule
+	option name '103.27.237.142'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.27.237.142'
+	option target 'DROP'
+
+config rule
+	option name '27.118.26.11'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '27.118.26.11'
+	option target 'DROP'
+
+config rule
+	option name '27.0.15.148'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '27.0.15.148'
+	option target 'DROP'
+
+config rule
+	option name '112.78.2.169'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '112.78.2.169'
+	option target 'DROP'
+
+config rule
+	option name '45.252.248.18'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '45.252.248.18'
+	option target 'DROP'
+
+config rule
+	option name '185.236.203.236'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '185.236.203.236'
+	option target 'DROP'
+
+config rule
+	option name '37.203.214.50'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '37.203.214.50'
+	option target 'DROP'
+
+config rule
+	option name '42.112.17.180'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '42.112.17.180'
+	option target 'DROP'
+
+config rule
+	option name '185.243.115.164'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '185.243.115.164'
+	option target 'DROP'
+
+config rule
+	option name '103.39.108.36'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.39.108.36'
+	option target 'DROP'
+
+config rule
+	option name '193.29.58.149'
+	option src '*'
+	option target 'DROP'
+	option dest_ip '193.29.58.149'
+	option dest 'wan'
+
+config rule
+	option name '192.64.119.185'
+	option src '*'
+	option target 'DROP'
+	option dest_ip '192.64.119.185'
+	option dest 'wan'
+
+config rule
+	option name '1.65.166.221'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '1.65.166.221'
+	option target 'DROP'
+
+config rule
+	option name '103.221.220.12'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.221.220.12'
+	option target 'DROP'
+
+config rule
+	option name '103.27.206.197'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.27.206.197'
+	option target 'DROP'
+
+config rule
+	option name '104.16.20.96'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '104.16.20.96'
+	option target 'DROP'
+
+config rule
+	option name '104.18.35.131'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '104.18.35.131'
+	option target 'DROP'
+
+config rule
+	option name '107.155.140.75'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '107.155.140.75'
+	option target 'DROP'
+
+config rule
+	option name '108.61.210.102'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '108.61.210.102'
+	option target 'DROP'
+
+config rule
+	option name '128.31.0.39'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '128.31.0.39'
+	option target 'DROP'
+
+config rule
+	option name '131.188.40.189'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '131.188.40.189'
+	option target 'DROP'
+
+config rule
+	option name '136.243.176.148'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '136.243.176.148'
+	option target 'DROP'
+
+config rule
+	option name '136.243.243.6'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '136.243.243.6'
+	option target 'DROP'
+
+config rule
+	option name '144.76.175.205'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '144.76.175.205'
+	option target 'DROP'
+
+config rule
+	option name '144.76.91.135'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '144.76.91.135'
+	option target 'DROP'
+
+config rule
+	option name '154.35.32.5'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '154.35.32.5'
+	option target 'DROP'
+
+config rule
+	option name '171.25.193.9'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '171.25.193.9'
+	option target 'DROP'
+
+config rule
+	option name '176.107.82.36'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '176.107.82.36'
+	option target 'DROP'
+
+config rule
+	option name '178.238.236.12'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '178.238.236.12'
+	option target 'DROP'
+
+config rule
+	option name '178.254.19.112'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '178.254.19.112'
+	option target 'DROP'
+
+config rule
+	option name '178.79.159.147'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '178.79.159.147'
+	option target 'DROP'
+
+config rule
+	option name '185.112.82.50'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '185.112.82.50'
+	option target 'DROP'
+
+config rule
+	option name '185.161.211.79'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '185.161.211.79'
+	option target 'DROP'
+
+config rule
+	option name '185.212.149.111'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '185.212.149.111'
+	option target 'DROP'
+
+config rule
+	option name '185.236.78.63'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '185.236.78.63'
+	option target 'DROP'
+
+config rule
+	option name '185.82.218.180'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '185.82.218.180'
+	option target 'DROP'
+
+config rule
+	option name '188.212.127.21'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '188.212.127.21'
+	option target 'DROP'
+
+config rule
+	option name '192.42.113.102'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '192.42.113.102'
+	option target 'DROP'
+
+config rule
+	option name '192.42.115.102'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '192.42.115.102'
+	option target 'DROP'
+
+config rule
+	option name '193.228.143.17'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '193.228.143.17'
+	option target 'DROP'
+
+config rule
+	option name '193.23.244.244'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '193.23.244.244'
+	option target 'DROP'
+
+config rule
+	option name '194.109.206.212'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '194.109.206.212'
+	option target 'DROP'
+
+config rule
+	option name '195.154.207.29'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '195.154.207.29'
+	option target 'DROP'
+
+config rule
+	option name '195.201.218.109'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '195.201.218.109'
+	option target 'DROP'
+
+config rule
+	option name '208.83.223.34'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '208.83.223.34'
+	option target 'DROP'
+
+config rule
+	option name '209.250.253.171'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '209.250.253.171'
+	option target 'DROP'
+
+config rule
+	option name '212.47.240.249'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '212.47.240.249'
+	option target 'DROP'
+
+config rule
+	option name '212.51.159.248'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '212.51.159.248'
+	option target 'DROP'
+
+config rule
+	option name '213.239.214.15'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '213.239.214.15'
+	option target 'DROP'
+
+config rule
+	option name '217.79.178.60'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '217.79.178.60'
+	option target 'DROP'
+
+config rule
+	option name '37.187.115.47'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '37.187.115.47'
+	option target 'DROP'
+
+config rule
+	option name '45.252.248.18'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '45.252.248.18'
+	option target 'DROP'
+
+config rule
+	option name '45.252.251.8'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '45.252.251.8'
+	option target 'DROP'
+
+config rule
+	option name '5.39.33.178'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '5.39.33.178'
+	option target 'DROP'
+
+config rule
+	option name '51.15.81.148'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '51.15.81.148'
+	option target 'DROP'
+
+config rule
+	option name '51.15.81.45'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '51.15.81.45'
+	option target 'DROP'
+
+config rule
+	option name '51.68.215.68'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '51.68.215.68'
+	option target 'DROP'
+
+config rule
+	option name '54.36.227.247'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '54.36.227.247'
+	option target 'DROP'
+
+config rule
+	option name '62.210.123.24'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '62.210.123.24'
+	option target 'DROP'
+
+config rule
+	option name '62.210.177.181'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '62.210.177.181'
+	option target 'DROP'
+
+config rule
+	option name '66.147.244.57'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '66.147.244.57'
+	option target 'DROP'
+
+config rule
+	option name '76.73.17.194'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '76.73.17.194'
+	option target 'DROP'
+
+config rule
+	option name '77.22.127.39'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '77.22.127.39'
+	option target 'DROP'
+
+config rule
+	option name '77.68.11.42'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '77.68.11.42'
+	option target 'DROP'
+
+config rule
+	option name '77.87.50.6'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '77.87.50.6'
+	option target 'DROP'
+
+config rule
+	option name '78.46.53.11'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '78.46.53.11'
+	option target 'DROP'
+
+config rule
+	option name '78.47.226.12'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '78.47.226.12'
+	option target 'DROP'
+
+config rule
+	option name '78.47.98.200'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '78.47.98.200'
+	option target 'DROP'
+
+config rule
+	option name '82.251.167.192'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '82.251.167.192'
+	option target 'DROP'
+
+config rule
+	option name '83.227.87.11'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '83.227.87.11'
+	option target 'DROP'
+
+config rule
+	option name '85.195.230.129'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '85.195.230.129'
+	option target 'DROP'
+
+config rule
+	option name '86.59.21.38'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '86.59.21.38'
+	option target 'DROP'
+
+config rule
+	option name '88.99.217.110'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '88.99.217.110'
+	option target 'DROP'
+
+config rule
+	option name '89.252.190.114'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '89.252.190.114'
+	option target 'DROP'
+
+config rule
+	option name '89.44.47.41'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '89.44.47.41'
+	option target 'DROP'
+
+config rule
+	option name '90.191.164.188'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '90.191.164.188'
+	option target 'DROP'
+
+config rule
+	option name '91.225.197.7'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '91.225.197.7'
+	option target 'DROP'
+
+config rule
+	option name '95.154.194.110'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '95.154.194.110'
+	option target 'DROP'
+
+config rule
+	option name '45.125.65.76'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '45.125.65.76'
+	option target 'DROP'
+
+config rule
+	option name '199.2.137.202'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '199.2.137.202'
+	option target 'DROP'
+
+config rule
+	option name '95.211.230.75'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '95.211.230.75'
+	option target 'DROP'
+
+config rule
+	option name '93.159.228.22'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '93.159.228.22'
+	option target 'DROP'
+
+config rule
+	option name '77.74.178.24'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '77.74.178.24'
+	option target 'DROP'
+
+config rule
+	option name '58.158.177.102'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '58.158.177.102'
+	option target 'DROP'
+
+config rule
+	option name '103.193.4.182'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.193.4.182'
+	option target 'DROP'
+
+config rule
+	option name '35.195.48.106'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '35.195.48.106'
+	option target 'DROP'
+
+config rule
+	option name '5.135.254.110'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '5.135.254.110'
+	option target 'DROP'
+
+config rule
+	option name '35.187.36.248'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '35.187.36.248'
+	option target 'DROP'
+
+config rule
+	option name '103.35.57.157'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.35.57.157'
+	option target 'DROP'
+
+config rule
+	option name '103.209.194.124'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.209.194.124'
+	option target 'DROP'
+
+config rule
+	option name '93.113.131.110'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '93.113.131.110'
+	option target 'DROP'
+
+config rule
+	option name '220.158.216.151'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '220.158.216.151'
+	option target 'DROP'
+
+config rule
+	option name '220.158.216.115'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '220.158.216.115'
+	option target 'DROP'
+
+config rule
+	option name '103.193.4.226'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.193.4.226'
+	option target 'DROP'
+
+config rule
+	option name '103.193.4.160'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.193.4.160'
+	option target 'DROP'
+
+config rule
+	option name '66.154.125.145'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '66.154.125.145'
+	option target 'DROP'
+
+config rule
+	option name '188.42.254.103'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '188.42.254.103'
+	option target 'DROP'
+
+config rule
+	option name '103.35.57.16'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.35.57.16'
+	option target 'DROP'
+
+config rule
+	option name '103.209.194.103'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.209.194.103'
+	option target 'DROP'
+
+config rule
+	option name '162.255.119.80'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '162.255.119.80'
+	option target 'DROP'
+
+config rule
+	option name '162.243.197.9'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '162.243.197.9'
+	option target 'DROP'
+
+config rule
+	option name '80.255.3.102'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '80.255.3.102'
+	option target 'DROP'
+
+config rule
+	option name '108.170.20.88'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '108.170.20.88'
+	option target 'DROP'
+
+config rule
+	option name '91.229.77.179'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '91.229.77.179'
+	option target 'DROP'
+
+config rule
+	option name '91.229.77.192'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '91.229.77.192'
+	option target 'DROP'
+
+config rule
+	option name '204.11.56.48'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '204.11.56.48'
+	option target 'DROP'
+
+config rule
+	option name '162.255.119.193'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '162.255.119.193'
+	option target 'DROP'
+
+config rule
+	option name '91.229.78.226'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '91.229.78.226'
+	option target 'DROP'
+
+config rule
+	option name '185.77.129.142'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '185.77.129.142'
+	option target 'DROP'
+
+config rule
+	option name '103.209.194.143'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.209.194.143'
+	option target 'DROP'
+
+config rule
+	option name '176.223.165.165'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '176.223.165.165'
+	option target 'DROP'
+
+config rule
+	option name '103.209.192.80'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.209.192.80'
+	option target 'DROP'
+
+config rule
+	option name '185.243.115.47'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '185.243.115.47'
+	option target 'DROP'
+
+config rule
+	option name '176.107.187.118'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '176.107.187.118'
+	option target 'DROP'
+
+config rule
+	option name '185.228.83.8'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '185.228.83.8'
+	option target 'DROP'
+
+config rule
+	option name '162.255.119.135'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '162.255.119.135'
+	option target 'DROP'
+
+config rule
+	option name '58.64.184.209'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '58.64.184.209'
+	option target 'DROP'
+
+config rule
+	option name '103.209.194.140'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.209.194.140'
+	option target 'DROP'
+
+config rule
+	option name '185.243.114.138'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '185.243.114.138'
+	option target 'DROP'
+
+config rule
+	option name '192.99.181.14'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '192.99.181.14'
+	option target 'DROP'
+
+config rule
+	option name '110.34.166.15'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '110.34.166.15'
+	option target 'DROP'
+
+config rule
+	option name '52.220.224.37'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '52.220.224.37'
+	option target 'DROP'
+
+config rule
+	option name '93.117.137.230'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '93.117.137.230'
+	option target 'DROP'
+
+config rule
+	option name '118.70.2.106'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '118.70.2.106'
+	option target 'DROP'
+
+config rule
+	option name '104.18.55.43'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '104.18.55.43'
+	option target 'DROP'
+
+config rule
+	option name '104.18.54.43'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '104.18.54.43'
+	option target 'DROP'
+
+config rule
+	option name '103.93.76.27'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.93.76.27'
+	option target 'DROP'
+
+config rule
+	option name '210.140.10.91'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '210.140.10.91'
+	option target 'DROP'
+
+config rule
+	option name '130.255.184.38'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '130.255.184.38'
+	option target 'DROP'
+
+config rule
+	option name '209.58.179.202'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '209.58.179.202'
+	option target 'DROP'
+
+config rule
+	option name '103.209.194.159'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.209.194.159'
+	option target 'DROP'
+
+config rule
+	option name '154.16.37.122'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '154.16.37.122'
+	option target 'DROP'
+
+config redirect
+	option target 'DNAT'
+	option dest 'lan'
+	option dest_ip '192.168.17.189'
+	option dest_port '1194'
+	option name 'vpn02-quang'
+	option src 'wan'
+	option reflection '0'
+	option src_dport '9988'
+	option proto 'tcp udp'
+	option src_dip '113.160.0.10'
+
+config rule
+	option name '154.16.37.122'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '154.16.37.122'
+	option target 'DROP'
+
+config rule
+	option name '103.18.6.24'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.18.6.24'
+	option target 'DROP'
+
+config rule
+	option name '159.89.138.46'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '159.89.138.46'
+	option target 'DROP'
+
+config rule
+	option name '187.207.58.148'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '187.207.58.148'
+	option target 'DROP'
+
+config rule
+	option name '201.230.255.100'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '201.230.255.100'
+	option target 'DROP'
+
+config rule
+	option name '201.111.29.109'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '201.111.29.109'
+	option target 'DROP'
+
+config rule
+	option name '187.163.177.194'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '187.163.177.194'
+	option target 'DROP'
+
+config rule
+	option name '193.23.244.244'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '193.23.244.244'
+	option target 'DROP'
+
+config rule
+	option name '85.17.88.174'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '85.17.88.174'
+	option target 'DROP'
+
+config rule
+	option name '173.208.206.188'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '173.208.206.188'
+	option target 'DROP'
+
+config rule
+	option name '85.224.158.141'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '85.224.158.141'
+	option target 'DROP'
+
+config rule
+	option name '89.238.178.238'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '89.238.178.238'
+	option target 'DROP'
+
+config rule
+	option name '137.50.19.11'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '137.50.19.11'
+	option target 'DROP'
+
+config rule
+	option name '144.76.71.91'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '144.76.71.91'
+	option target 'DROP'
+
+config rule
+	option name '62.151.180.62'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '62.151.180.62'
+	option target 'DROP'
+
+config rule
+	option name '149.154.159.87'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '149.154.159.87'
+	option target 'DROP'
+
+config rule
+	option name '212.16.170.158'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '212.16.170.158'
+	option target 'DROP'
+
+config rule
+	option name '103.18.6.24'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.18.6.24'
+	option target 'DROP'
+
+config rule
+	option name '159.89.138.46'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '159.89.138.46'
+	option target 'DROP'
+
+config rule
+	option name '185.236.203.49'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '185.236.203.49'
+	option target 'DROP'
+
+config rule
+	option name '37.220.31.93'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '37.220.31.93'
+	option target 'DROP'
+
+config rule
+	option name '103.83.156.216'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.83.156.216'
+	option target 'DROP'
+
+config rule
+	option name '109.248.149.96'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '109.248.149.96'
+	option target 'DROP'
+
+config rule
+	option name '103.83.156.138'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.83.156.138'
+	option target 'DROP'
+
+config rule
+	option name '84.38.134.198'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '84.38.134.198'
+	option target 'DROP'
+
+config rule
+	option name '176.107.185.4'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '176.107.185.4'
+	option target 'DROP'
+
+config rule
+	option name '110.34.166.52'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '110.34.166.52'
+	option target 'DROP'
+
+config rule
+	option name '198.50.234.111'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '198.50.234.111'
+	option target 'DROP'
+
+config rule
+	option name '18.191.184.18'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '18.191.184.18'
+	option target 'DROP'
+
+config rule
+	option name '18.188.255.123'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '18.188.255.123'
+	option target 'DROP'
+
+config rule
+	option name '18.188.255.123'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '18.188.255.123'
+	option target 'DROP'
+
+config rule
+	option name '34.253.221.101'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '34.253.221.101'
+	option target 'DROP'
+
+config rule
+	option name '45.76.25.185'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '45.76.25.185'
+	option target 'DROP'
+
+config rule
+	option name '45.32.159.114'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '45.32.159.114'
+	option target 'DROP'
+
+config rule
+	option name '172.217.24.212'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '172.217.24.212'
+	option target 'DROP'
+
+config rule
+	option name '172.217.161.148'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '172.217.161.148'
+	option target 'DROP'
+
+config rule
+	option name '216.58.220.212'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '216.58.220.212'
+	option target 'DROP'
+
+config rule
+	option name '95.179.213.36'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '95.179.213.36'
+	option target 'DROP'
+
+config rule
+	option name '207.148.23.160'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '207.148.23.160'
+	option target 'DROP'
+
+config rule
+	option name '172.217.31.244'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '172.217.31.244'
+	option target 'DROP'
+
+config rule
+	option name '216.58.199.20'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '216.58.199.20'
+	option target 'DROP'
+
+config rule
+	option name '13.230.4.45'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '13.230.4.45'
+	option target 'DROP'
+
+config rule
+	option name '199.247.27.44'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '199.247.27.44'
+	option target 'DROP'
+
+config rule
+	option name '95.179.212.50'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '95.179.212.50'
+	option target 'DROP'
+
+config rule
+	option name '162.255.119.147'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '162.255.119.147'
+	option target 'DROP'
+
+config rule
+	option src '*'
+	option dest 'wan'
+	option target 'DROP'
+	option name '194.9.177.13'
+	option dest_ip '194.9.177.13'
+
+config rule
+	option name '79.137.86.189'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '79.137.86.189'
+	option target 'DROP'
+
+config rule
+	option name '81.56.198.200'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '81.56.198.200'
+	option target 'DROP'
+
+config rule
+	option name '190.154.155.34'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '190.154.155.34'
+	option target 'DROP'
+
+config rule
+	option name '94.155.113.12'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '94.155.113.12'
+	option target 'DROP'
+
+config rule
+	option name '210.245.90.200'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '210.245.90.200'
+	option target 'DROP'
+
+config rule
+	option name '103.251.25.14'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.251.25.14'
+	option target 'DROP'
+
+config rule
+	option name '178.128.114.255'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '178.128.114.255'
+	option target 'DROP'
+
+config rule
+	option name '45.252.248.16'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '45.252.248.16'
+	option target 'DROP'
+
+config rule
+	option name '91.92.109.137'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '91.92.109.137'
+	option target 'DROP'
+
+config rule
+	option name '46.28.106.30'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '46.28.106.30'
+	option target 'DROP'
+
+config rule
+	option name '103.23.224.148'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.23.224.148'
+	option target 'DROP'
+
+config rule
+	option name '141.198.3.191'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '141.198.3.191'
+	option target 'DROP'
+
+config rule
+	option name '138.204.171.108'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '138.204.171.108'
+	option target 'DROP'
+
+config rule
+	option name '138.201.44.8'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '138.201.44.8'
+	option target 'DROP'
+
+config rule
+	option name '146.185.146.127'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '146.185.146.127'
+	option target 'DROP'
+
+config rule
+	option name '165.227.116.183'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '165.227.116.183'
+	option target 'DROP'
+
+config rule
+	option name '165.227.2.127'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '165.227.2.127'
+	option target 'DROP'
+
+config rule
+	option name '176.107.177.205'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '176.107.177.205'
+	option target 'DROP'
+
+config rule
+	option name '176.57.71.45'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '176.57.71.45'
+	option target 'DROP'
+
+config rule
+	option name '185.203.242.41'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '185.203.242.41'
+	option target 'DROP'
+
+config rule
+	option name '185.250.207.56'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '185.250.207.56'
+	option target 'DROP'
+
+config rule
+	option name '198.211.125.92'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '198.211.125.92'
+	option target 'DROP'
+
+config rule
+	option name '206.189.200.8'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '206.189.200.8'
+	option target 'DROP'
+
+config rule
+	option name '207.246.95.21'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '207.246.95.21'
+	option target 'DROP'
+
+config rule
+	option name '37.139.2.57'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '37.139.2.57'
+	option target 'DROP'
+
+config rule
+	option name '45.33.96.212'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '45.33.96.212'
+	option target 'DROP'
+
+config rule
+	option name '45.79.179.13'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '45.79.179.13'
+	option target 'DROP'
+
+config rule
+	option name '46.101.115.96'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '46.101.115.96'
+	option target 'DROP'
+
+config rule
+	option name '67.205.133.186'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '67.205.133.186'
+	option target 'DROP'
+
+config rule
+	option name '95.142.39.195'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '95.142.39.195'
+	option target 'DROP'
+
+config rule
+	option name '95.46.44.198'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '95.46.44.198'
+	option target 'DROP'
+
+config rule
+	option name '104.237.131.29'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '104.237.131.29'
+	option target 'DROP'
+
+config rule
+	option name '185.202.174.84'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '185.202.174.84'
+	option target 'DROP'
+
+config rule
+	option name '185.80.233.166'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '185.80.233.166'
+	option target 'DROP'
+
+config rule
+	option name '188.166.105.24'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '188.166.105.24'
+	option target 'DROP'
+
+config rule
+	option name '192.81.223.204'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '192.81.223.204'
+	option target 'DROP'
+
+config rule
+	option name '209.126.106.228'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '209.126.106.228'
+	option target 'DROP'
+
+config rule
+	option name '217.12.218.95'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '217.12.218.95'
+	option target 'DROP'
+
+config rule
+	option name '37.139.21.20'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '37.139.21.20'
+	option target 'DROP'
+
+config rule
+	option name '46.166.173.109'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '46.166.173.109'
+	option target 'DROP'
+
+config rule
+	option name '47.75.151.154'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '47.75.151.154'
+	option target 'DROP'
+
+config rule
+	option name '89.105.194.236'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '89.105.194.236'
+	option target 'DROP'
+
+config rule
+	option name '167.99.90.25'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '167.99.90.25'
+	option target 'DROP'
+
+config rule
+	option name '185.112.158.180'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '185.112.158.180'
+	option target 'DROP'
+
+config rule
+	option name '217.182.164.10'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '217.182.164.10'
+	option target 'DROP'
+
+config rule
+	option name '89.163.245.47'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '89.163.245.47'
+	option target 'DROP'
+
+config rule
+	option name '185.158.113.114'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '185.158.113.114'
+	option target 'DROP'
+
+config rule
+	option name '172.217.12.208'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '172.217.12.208'
+	option target 'DROP'
+
+config rule
+	option name '185.225.17.163'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '185.225.17.163'
+	option target 'DROP'
+
+config rule
+	option name '116.206.74.3'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '116.206.74.3'
+	option target 'DROP'
+
+config rule
+	option name '88.119.179.218'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '88.119.179.218'
+	option target 'DROP'
+
+config rule
+	option name '109.200.24.116'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '109.200.24.116'
+	option target 'DROP'
+
+config rule
+	option src 'lan'
+	option name 'out_port_445'
+	option dest 'wan'
+	option dest_port '445'
+	option target 'REJECT'
+
+config rule
+	option src 'lan'
+	option name 'out_port_136'
+	option dest 'wan'
+	option dest_port '136'
+	option target 'REJECT'
+
+config rule
+	option src 'lan'
+	option name 'out_port_137'
+	option dest 'wan'
+	option dest_port '137'
+	option target 'REJECT'
+
+config rule
+	option src 'lan'
+	option name 'out_port_138'
+	option dest 'wan'
+	option dest_port '138'
+	option target 'REJECT'
+
+config rule
+	option src 'lan'
+	option name 'out_port_139'
+	option dest 'wan'
+	option dest_port '139'
+	option target 'REJECT'
+
+config rule
+	option src 'wan'
+	option name 'in_port_139'
+	option dest 'lan'
+	option dest_port '139'
+	option target 'REJECT'
+
+config rule
+	option src 'wan'
+	option name 'in_port_138'
+	option dest 'lan'
+	option dest_port '138'
+	option target 'REJECT'
+
+config rule
+	option src 'wan'
+	option name 'in_port_137'
+	option dest 'lan'
+	option dest_port '137'
+	option target 'REJECT'
+
+config rule
+	option src 'wan'
+	option name 'in_port_445'
+	option dest 'lan'
+	option dest_port '445'
+	option target 'REJECT'
+
+config rule
+	option name '185.158.117.101'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '185.158.117.101'
+	option target 'DROP'
+
+config rule
+	option name '185.158.69.45'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '185.158.69.45'
+	option target 'DROP'
+
+config rule
+	option name '185.158.58.121'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '185.158.58.121'
+	option target 'DROP'
+
+config rule
+	option name '185.158.57.225'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '185.158.57.225'
+	option target 'DROP'
+
+config rule
+	option name '185.158.81.159'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '185.158.81.159'
+	option target 'DROP'
+
+config rule
+	option name '185.158.47.186'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '185.158.47.186'
+	option target 'DROP'
+
+config rule
+	option name '185.177.59.70'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '185.177.59.70'
+	option target 'DROP'
+
+config rule
+	option name '134.119.217.87'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '134.119.217.87'
+	option target 'DROP'
+
+config rule
+	option name '209.40.192.188'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '209.40.192.188'
+	option target 'DROP'
+
+config rule
+	option name '195.20.44.127'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '195.20.44.127'
+	option target 'DROP'
+
+config rule
+	option name '51.77.97.65'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '51.77.97.65'
+	option target 'DROP'
+
+config rule
+	option name '103.199.16.37'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.199.16.37'
+	option target 'DROP'
+
+config rule
+	option name '138.68.11.111'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '138.68.11.111'
+	option target 'DROP'
+
+config rule
+	option name '162.243.157.103'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '162.243.157.103'
+	option target 'DROP'
+
+config rule
+	option name '178.128.243.250'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '178.128.243.250'
+	option target 'DROP'
+
+config rule
+	option name '52.50.123.175'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '52.50.123.175'
+	option target 'DROP'
+
+config rule
+	option name '138.201.44.8'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '138.201.44.8'
+	option target 'DROP'
+
+config rule
+	option name '207.246.95.21'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '207.246.95.21'
+	option target 'DROP'
+
+config rule
+	option name '141.105.64.231'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '141.105.64.231'
+	option target 'DROP'
+
+config rule
+	option name '27.255.65.110'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '27.255.65.110'
+	option target 'DROP'
+
+config rule
+	option name '173.209.43.20'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '173.209.43.20'
+	option target 'DROP'
+
+config rule
+	option name '198.50.234.111'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '198.50.234.111'
+	option target 'DROP'
+
+config rule
+	option name '23.227.201.220'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '23.227.201.220'
+	option target 'DROP'
+
+config rule
+	option name '138.68.180.211'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '138.68.180.211'
+	option target 'DROP'
+
+config rule
+	option name '167.99.6.43'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '167.99.6.43'
+	option target 'DROP'
+
+config rule
+	option name '194.187.249.76'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '194.187.249.76'
+	option target 'DROP'
+
+config rule
+	option name '95.183.52.148'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '95.183.52.148'
+	option target 'DROP'
+
+config rule
+	option name '185.158.5.243'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '185.158.5.243'
+	option target 'DROP'
+
+config rule
+	option name '185.158.20.131'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '185.158.20.131'
+	option target 'DROP'
+
+config rule
+	option name '91.195.240.103'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '91.195.240.103'
+	option target 'DROP'
+
+config rule
+	option name '192.64.119.113'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '192.64.119.113'
+	option target 'DROP'
+
+config rule
+	option name '185.174.26.110'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '185.174.26.110'
+	option target 'DROP'
+
+config rule
+	option name '136.243.102.157'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '136.243.102.157'
+	option target 'DROP'
+
+config rule
+	option name '136.243.88.145'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '136.243.88.145'
+	option target 'DROP'
+
+config rule
+	option name '136.243.94.27'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '136.243.94.27'
+	option target 'DROP'
+
+config rule
+	option name '176.9.147.178'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '176.9.147.178'
+	option target 'DROP'
+
+config rule
+	option name '46.4.119.208'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '46.4.119.208'
+	option target 'DROP'
+
+config rule
+	option name '78.46.49.212'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '78.46.49.212'
+	option target 'DROP'
+
+config rule
+	option name '94.130.64.225'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '94.130.64.225'
+	option target 'DROP'
+
+config rule
+	option name '94.130.9.194'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '94.130.9.194'
+	option target 'DROP'
+
+config rule
+	option name '45.252.248.20'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '45.252.248.20'
+	option target 'DROP'
+
+config rule
+	option name '112.213.89.40'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '112.213.89.40'
+	option target 'DROP'
+
+config rule
+	option name '107.173.49.208'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '107.173.49.208'
+	option target 'DROP'
+
+config rule
+	option name '35.186.154.53'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '35.186.154.53'
+	option target 'DROP'
+
+config rule
+	option name '118.70.124.48'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '118.70.124.48'
+	option target 'DROP'
+
+config rule
+	option name '103.28.37.23'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.28.37.23'
+	option target 'DROP'
+
+config rule
+	option name '103.42.56.176'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.42.56.176'
+	option target 'DROP'
+
+config rule
+	option name '206.189.91.36'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '206.189.91.36'
+	option target 'DROP'
+
+config rule
+	option name '103.27.62.50'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.27.62.50'
+	option target 'DROP'
+
+config rule
+	option name '103.221.220.17'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.221.220.17'
+	option target 'DROP'
+
+config rule
+	option name '103.48.81.43'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.48.81.43'
+	option target 'DROP'
+
+config rule
+	option name '103.92.30.80'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.92.30.80'
+	option target 'DROP'
+
+config rule
+	option name '61.14.235.209'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '61.14.235.209'
+	option target 'DROP'
+
+config rule
+	option name '45.122.220.220'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '45.122.220.220'
+	option target 'DROP'
+
+config rule
+	option src '*'
+	option dest_ip '181.198.203.150'
+	option name '103.28.36.229'
+	option dest 'wan'
+	option target 'ACCEPT'
+
+config rule
+	option name '104.237.218.70'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '104.237.218.70'
+	option target 'DROP'
+
+config rule
+	option name '185.202.174.84'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '185.202.174.84'
+	option target 'DROP'
+
+config rule
+	option name '89.105.194.236'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '89.105.194.236'
+	option target 'DROP'
+
+config rule
+	option name '93.115.26.171'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '93.115.26.171'
+	option target 'DROP'
+
+config rule
+	option name '185.202.174.80'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '185.202.174.80'
+	option target 'DROP'
+
+config rule
+	option name '185.222.211.98'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '185.222.211.98'
+	option target 'DROP'
+
+config rule
+	option name '103.73.65.116'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.73.65.116'
+	option target 'DROP'
+
+config rule
+	option name '176.126.85.207'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '176.126.85.207'
+	option target 'DROP'
+
+config rule
+	option name '185.202.174.41'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '185.202.174.41'
+	option target 'DROP'
+
+config rule
+	option name '185.202.174.91'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '185.202.174.91'
+	option target 'DROP'
+
+config rule
+	option name '185.202.174.44'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '185.202.174.44'
+	option target 'DROP'
+
+config rule
+	option name '185.202.174.31'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '185.202.174.31'
+	option target 'DROP'
+
+config rule
+	option name '185.158.113.114'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '185.158.113.114'
+	option target 'DROP'
+
+config rule
+	option name '89.105.198.28'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '89.105.198.28'
+	option target 'DROP'
+
+config rule
+	option name '89.105.198.21'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '89.105.198.21'
+	option target 'DROP'
+
+config rule
+	option name '89.105.202.58'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '89.105.202.58'
+	option target 'DROP'
+
+config rule
+	option name '89.34.111.113'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '89.34.111.113'
+	option target 'DROP'
+
+config rule
+	option name '185.162.131.92'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '185.162.131.92'
+	option target 'DROP'
+
+config rule
+	option name '47.91.56.21'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '47.91.56.21'
+	option target 'DROP'
+
+config rule
+	option name '31.148.220.53'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '31.148.220.53'
+	option target 'DROP'
+
+config rule
+	option name '45.77.36.5'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '45.77.36.5'
+	option target 'DROP'
+
+config rule
+	option name '176.10.125.108'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '176.10.125.108'
+	option target 'DROP'
+
+config rule
+	option name '103.255.237.34'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '103.255.237.34'
+	option target 'DROP'
+
+config rule
+	option name '185.49.68.106'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '185.49.68.106'
+	option target 'DROP'
+
+config rule
+	option name '204.11.56.48'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '204.11.56.48'
+	option target 'DROP'
+
+config rule
+	option name '46.166.184.104'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '46.166.184.104'
+	option target 'DROP'
+
+config rule
+	option name '185.206.180.121'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '185.206.180.121'
+	option target 'DROP'
+
+config rule
+	option name '58.158.177.102'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '58.158.177.102'
+	option target 'DROP'
+
+config rule
+	option name '80.255.3.87'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '80.255.3.87'
+	option target 'DROP'
+
+config rule
+	option name '23.227.196.210'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '23.227.196.210'
+	option target 'DROP'
+
+config rule
+	option name '193.169.245.137'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '193.169.245.137'
+	option target 'DROP'
+
+config rule
+	option name '185.157.79.3'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '185.157.79.3'
+	option target 'DROP'
+
+config rule
+	option name '104.237.218.72'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '104.237.218.72'
+	option target 'DROP'
+
+config rule
+	option name '104.237.218.70'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '104.237.218.70'
+	option target 'DROP'
+
+config rule
+	option name '188.166.197.9'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '188.166.197.9'
+	option target 'DROP'
+
+config rule
+	option name '185.29.9.155'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '185.29.9.155'
+	option target 'DROP'
+
+config rule
+	option name '144.202.54.86'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '144.202.54.86'
+	option target 'DROP'
+
+config rule
+	option name '198.50.234.103'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '198.50.234.103'
+	option target 'DROP'
+
+config rule
+	option name '147.135.170.198'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '147.135.170.198'
+	option target 'DROP'
+
+config rule
+	option name '185.29.11.165'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '185.29.11.165'
+	option target 'DROP'
+
+config rule
+	option name '5.104.105.194'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '5.104.105.194'
+	option target 'DROP'
+
+config rule
+	option name '112.213.89.40'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '112.213.89.40'
+	option target 'DROP'
+
+config rule
+	option name '67.23.254.61'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '67.23.254.61'
+	option target 'DROP'
+
+config rule
+	option name '62.212.33.98'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '62.212.33.98'
+	option target 'DROP'
+
+config rule
+	option name '153.92.5.124'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '153.92.5.124'
+	option target 'DROP'
+
+config rule
+	option name '185.117.22.197'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '185.117.22.197'
+	option target 'DROP'
+
+config rule
+	option name '23.94.188.246'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '23.94.188.246'
+	option target 'DROP'
+
+config rule
+	option name '67.23.254.170'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '67.23.254.170'
+	option target 'DROP'
+
+config rule
+	option name '72.52.150.218'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '72.52.150.218'
+	option target 'DROP'
+
+config rule
+	option name '148.66.136.62'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '148.66.136.62'
+	option target 'DROP'
+
+config rule
+	option name '107.180.24.253'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '107.180.24.253'
+	option target 'DROP'
+
+config rule
+	option name '108.179.246.138'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '108.179.246.138'
+	option target 'DROP'
+
+config rule
+	option name '18.221.35.214'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '18.221.35.214'
+	option target 'DROP'
+
+config rule
+	option name '94.46.15.200'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '94.46.15.200'
+	option target 'DROP'
+
+config rule
+	option name '66.23.237.186'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '66.23.237.186'
+	option target 'DROP'
+
+config rule
+	option name '72.52.150.218'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '72.52.150.218'
+	option target 'DROP'
+
+config rule
+	option name '169.239.128.111'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '169.239.128.111'
+	option target 'DROP'
+
+config rule
+	option name '194.165.16.228'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '194.165.16.228'
+	option target 'DROP'
+
+config rule
+	option name '31.210.127.77'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '31.210.127.77'
+	option target 'DROP'
+
+config rule
+	option name '89.144.25.170'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '89.144.25.170'
+	option target 'DROP'
+
+config rule
+	option name '89.144.25.171'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '89.144.25.171'
+	option target 'DROP'
+
+config rule
+	option name '89.144.25.172'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '89.144.25.172'
+	option target 'DROP'
+
+config rule
+	option name '144.202.54.86'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '144.202.54.86'
+	option target 'DROP'
+
+config rule
+	option name '27.74.246.123'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '27.74.246.123'
+	option target 'DROP'
+
+config rule
+	option name '112.197.116.172'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '112.197.116.172'
+	option target 'DROP'
+
+config rule
+	option name '210.245.32.202'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '210.245.32.202'
+	option target 'DROP'
+
+config rule
+	option name '118.69.16.22'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '118.69.16.22'
+	option target 'DROP'
+
+config rule
+	option name '185.234.73.4'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '185.234.73.4'
+	option target 'DROP'
+
+config rule
+	option name '118.69.16.49'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '118.69.16.49'
+	option target 'DROP'
+
+config rule
+	option name '207.148.118.246'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '207.148.118.246'
+	option target 'DROP'
+
+config rule
+	option name '46.183.219.178'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '46.183.219.178'
+	option target 'DROP'
+
+config rule
+	option name '192.3.24.224'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '192.3.24.224'
+	option target 'DROP'
+
+config rule
+	option name '198.50.234.103'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '198.50.234.103'
+	option target 'DROP'
+
+config rule
+	option name '193.169.244.213'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '193.169.244.213'
+	option target 'DROP'
+
+config rule
+	option name '164.132.45.67'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '164.132.45.67'
+	option target 'DROP'
+
+config rule
+	option name '192.34.109.1'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '192.34.109.1'
+	option target 'DROP'
+
+config rule
+	option name '164.132.45.67'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '164.132.45.67'
+	option target 'DROP'
+
+config rule
+	option name '189.196.140.187'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '189.196.140.187'
+	option target 'DROP'
+
+config rule
+	option name '200.58.171.51'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '200.58.171.51'
+	option target 'DROP'
+
+config rule
+	option name '193.29.56.62'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '193.29.56.62'
+	option target 'DROP'
+
+config rule
+	option name '185.236.203.223'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '185.236.203.223'
+	option target 'DROP'
+
+config rule
+	option name '185.216.35.11'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '185.216.35.11'
+	option target 'DROP'
+
+config rule
+	option name '139.59.30.109'
+	option src '*'
+	option dest 'wan'
+	option dest_ip '139.59.30.109'
+	option target 'DROP'
+
+config redirect
+	option target 'DNAT'
+	option src 'wan'
+	option dest 'lan'
+	option proto 'tcp'
+	option src_dport '3333'
+	option dest_ip '192.168.40.137'
+	option dest_port '3389'
+	option name 'LanAnh_Sec'
+
+config redirect
+	option target 'DNAT'
+	option src 'wan'
+	option dest 'lan'
+	option proto 'udp'
+	option src_dport '11994'
+	option dest_ip '192.168.50.213'
+	option dest_port '11194'
+	option name 'BaoNQ_NAT_VPN'
+	option src_dip '103.238.70.242'
+	option reflection '0'
+	option enabled '0'
+
+config redirect
+	option target 'DNAT'
+	option src 'wan'
+	option dest 'lan'
+	option proto 'tcp'
+	option src_dport '3331'
+	option dest_ip '192.168.40.195'
+	option dest_port '3389'
+	option name 'Hai_Sec'
+	option reflection '1'
+
+config redirect
+	option target 'DNAT'
+	option src 'wan'
+	option dest 'lan'
+	option proto 'tcp'
+	option src_dport '1337'
+	option dest_ip '192.168.40.47'
+	option dest_port '8000'
+	option name 'AnhKhang_Sec'
+	option reflection '0'
+
+config redirect
+	option target 'DNAT'
+	option src 'wan'
+	option proto 'tcp'
+	option dest_ip '192.168.10.140'
+	option dest_port '8099'
+	option name 'hieuvcc10_140'
+	option src_dip '113.160.5.74'
+	option dest 'lan'
+	option reflection '0'
+	option src_dport '80'
+
+config redirect
+	option target 'DNAT'
+	option src 'wan'
+	option proto 'tcp'
+	option dest_ip '192.168.10.36'
+	option dest_port '8888'
+	option name 'bk_bipbip'
+	option src_dip '113.160.5.74'
+	option dest 'lan'
+	option reflection '0'
+	option src_dport '8888'
+
+config redirect
+	option target 'DNAT'
+	option src 'wan'
+	option proto 'tcp'
+	option dest_ip '192.168.10.26'
+	option dest_port '8889'
+	option name 'web8x01'
+	option src_dip '113.160.5.74'
+	option dest 'lan'
+	option reflection '0'
+	option src_dport '8889'
+
+config redirect
+	option target 'DNAT'
+	option src 'wan'
+	option proto 'tcp'
+	option dest_ip '192.168.10.164'
+	option dest_port '3389'
+	option name 'hieuvcc_remote'
+	option src_dip '113.160.5.74'
+	option dest 'lan'
+	option reflection '0'
+	option src_dport '1189'
+
+config redirect
+	option target 'DNAT'
+	option src 'wan'
+	option dest 'lan'
+	option proto 'tcp'
+	option src_dport '80'
+	option dest_ip '192.168.10.200'
+	option dest_port '8010'
+	option name 'hieuvcc_200'
+	option src_dip '113.160.0.10'
+	option reflection '0'
+
+config redirect
+	option target 'DNAT'
+	option src 'wan'
+	option dest 'lan'
+	option proto 'tcp'
+	option src_dport '1720'
+	option dest_ip '192.168.48.10'
+	option dest_port '1720'
+	option name 'Aver_Conf_T19_VIP'
+	option src_dip '113.160.5.74'
+	option reflection '0'
+
+config redirect
+	option target 'DNAT'
+	option src 'wan'
+	option dest 'lan'
+	option src_dport '30000-30299'
+	option dest_ip '192.168.48.10'
+	option dest_port '30000-30299'
+	option name 'Aver_Conf_T19_VIP_2'
+	option src_dip '113.160.5.74'
+	option reflection '0'
+	option proto 'tcp udp'
+
+config redirect
+	option target 'DNAT'
+	option src 'wan'
+	option dest 'lan'
+	option proto 'tcp'
+	option src_dport '80'
+	option dest_ip '192.168.52.15'
+	option dest_port '80'
+	option name 'Splunk_Security'
+	option src_dip '117.4.252.45'
+	option reflection '1'
+	option enabled '0'
+
+config redirect
+	option target 'DNAT'
+	option src 'wan'
+	option dest 'lan'
+	option proto 'tcp'
+	option src_dport '443'
+	option dest_ip '192.168.52.15'
+	option dest_port '443'
+	option name 'Splunk_Security_443'
+	option src_dip '117.4.252.45'
+	option reflection '1'
+	option enabled '0'
+
+config redirect
+	option target 'DNAT'
+	option src 'wan'
+	option proto 'tcp'
+	option src_dport '33389'
+	option dest_ip '192.168.40.58'
+	option dest_port '3389'
+	option name 'ThanhPVSecurity'
+	option src_dip '117.4.250.231'
+	option reflection '0'
+
+config redirect
+	option target 'DNAT'
+	option src 'wan'
+	option dest 'lan'
+	option proto 'udp'
+	option src_dport '12344'
+	option dest_ip '192.168.50.70'
+	option dest_port '1194'
+	option name 'vpn_tungnt'
+	option src_dip '117.4.250.231'
+	option reflection '1'
+
+config redirect
+	option target 'DNAT'
+	option src 'wan'
+	option dest 'lan'
+	option proto 'tcp'
+	option src_dport '5722'
+	option dest_ip '192.168.52.57'
+	option dest_port '22'
+	option name 'ThanhPVFwd'
+	option src_dip '117.4.250.231'
+	option reflection '0'
+
+config redirect
+	option target 'DNAT'
+	option src 'wan'
+	option dest 'lan'
+	option proto 'tcp'
+	option src_dport '5989'
+	option dest_ip '192.168.50.76'
+	option dest_port '80'
+	option name 'Member'
+	option src_dip '117.4.250.231'
+	option reflection '0'
+
+config redirect
+	option target 'DNAT'
+	option src 'wan'
+	option dest 'lan'
+	option proto 'tcp'
+	option src_dport '4567'
+	option dest_ip '192.168.49.68'
+	option dest_port '4567'
+	option name 'WifiMonitor'
+	option src_dip '117.4.250.231'
+	option reflection '0'
+
+config redirect
+	option target 'DNAT'
+	option src 'wan'
+	option dest 'lan'
+	option proto 'tcp'
+	option src_dport '9101-9103'
+	option dest_ip '192.168.50.10'
+	option dest_port '9101-9103'
+	option name 'Bareos'
+	option src_dip '117.4.250.231'
+	option reflection '0'
+
+config redirect
+	option target 'DNAT'
+	option src 'wan'
+	option dest 'lan'
+	option proto 'tcp'
+	option src_dport '5665'
+	option dest_ip '192.168.50.70'
+	option dest_port '5665'
+	option name 'icinga'
+	option src_dip '117.4.250.231'
+	option reflection '0'
+
+config redirect
+	option target 'DNAT'
+	option src 'wan'
+	option dest 'lan'
+	option proto 'tcp'
+	option src_dport '1337'
+	option dest_ip '192.168.40.173'
+	option dest_port '3389'
+	option name 'KhangLN'
+	option src_dip '117.4.250.231'
+	option reflection '0'
+
+config redirect
+	option target 'DNAT'
+	option src 'wan'
+	option dest 'lan'
+	option proto 'tcp'
+	option src_dport '21322'
+	option dest_ip '192.168.51.213'
+	option dest_port '21322'
+	option name 'Tan_SVR'
+	option src_dip '117.4.250.231'
+	option reflection '0'
+
+config redirect
+	option target 'DNAT'
+	option src 'wan'
+	option dest 'lan'
+	option proto 'tcp'
+	option src_dport '2395'
+	option dest_ip '192.168.51.190'
+	option dest_port '2395'
+	option name 'KhanhPV_Ads'
+	option src_dip '117.4.250.231'
+	option reflection '0'
+
+config redirect
+	option target 'DNAT'
+	option src 'wan'
+	option dest 'lan'
+	option proto 'tcp'
+	option src_dport '1720'
+	option dest_ip '192.168.48.50'
+	option dest_port '1720'
+	option name 'Aver_Cfr_T17_HT'
+	option src_dip '113.160.0.14'
+	option reflection '0'
+
+config redirect
+	option target 'DNAT'
+	option src 'wan'
+	option dest 'lan'
+	option proto 'tcp udp'
+	option src_dport '30000-30299'
+	option dest_ip '192.168.48.50'
+	option dest_port '30000-30299'
+	option name 'Aver_Cfr_T17_HT_2'
+	option src_dip '113.160.0.14'
+	option reflection '0'
+
+config redirect
+	option target 'DNAT'
+	option src 'wan'
+	option dest 'lan'
+	option proto 'tcp'
+	option src_dport '33389'
+	option dest_ip '192.168.40.58'
+	option dest_port '3389'
+	option name 'Sec'
+	option src_dip '113.190.232.10'
+	option reflection '0'
+
+config redirect
+	option target 'DNAT'
+	option src 'wan'
+	option dest 'lan'
+	option proto 'tcp'
+	option src_dport '1720'
+	option dest_ip '192.168.48.48'
+	option dest_port '1720'
+	option name 'Aver_Cfr_T17_Vip'
+	option src_dip '113.190.232.10'
+	option reflection '0'
+
+config redirect
+	option target 'DNAT'
+	option src 'wan'
+	option dest 'lan'
+	option proto 'tcp udp'
+	option src_dport '30000-30299'
+	option dest_ip '192.168.48.48'
+	option dest_port '30000-30299'
+	option name 'Aver_Cfr_T17_Vip'
+	option src_dip '113.190.232.10'
+	option reflection '0'
+
+config redirect
+	option target 'DNAT'
+	option src 'wan'
+	option dest 'lan'
+	option proto 'udp'
+	option src_dport '15100-15300'
+	option dest_ip '192.168.50.72'
+	option dest_port '15100-15300'
+	option name 'VPN_SHG'
+	option src_dip '113.190.246.18'
+	option reflection '0'
+
+config redirect
+	option target 'DNAT'
+	option src 'wan'
+	option dest 'lan'
+	option proto 'tcp'
+	option src_dport '5038'
+	option dest_ip '192.168.51.42'
+	option dest_port '5038'
+	option name 'VoIP_local'
+	option src_dip '113.190.246.18'
+	option reflection '0'
+
+config redirect
+	option target 'DNAT'
+	option src 'wan'
+	option dest 'lan'
+	option proto 'tcp'
+	option src_dport '7500'
+	option dest_ip '192.168.51.42'
+	option dest_port '7500'
+	option name 'VoIP_local'
+	option src_dip '113.190.246.18'
+	option reflection '0'
+
+config redirect
+	option target 'DNAT'
+	option src 'wan'
+	option dest 'lan'
+	option proto 'tcp'
+	option src_dport '1720'
+	option dest_ip '192.168.48.11'
+	option dest_port '1720'
+	option name 'Aver_Cfr_T21_Vip'
+	option src_dip '123.25.30.77'
+	option reflection '0'
+
+config redirect
+	option target 'DNAT'
+	option src 'wan'
+	option dest 'lan'
+	option proto 'tcp udp'
+	option src_dport '30000-30299'
+	option dest_ip '192.168.48.11'
+	option dest_port '30000-30299'
+	option name 'Aver_Cfr_T21_Vip'
+	option src_dip '123.25.30.77'
+	option reflection '0'
+
+config redirect
+	option target 'DNAT'
+	option src 'wan'
+	option dest 'lan'
+	option proto 'tcp'
+	option src_dport '1720'
+	option dest_ip '192.168.48.12'
+	option dest_port '1720'
+	option name 'Aver_Cfr_T20_VIP'
+	option src_dip '113.160.73.210'
+	option reflection '0'
+
+config redirect
+	option target 'DNAT'
+	option src 'wan'
+	option dest 'lan'
+	option proto 'tcp udp'
+	option src_dport '30000-30299'
+	option dest_ip '192.168.48.12'
+	option dest_port '30000-30299'
+	option name 'Aver_Cfr_T20_VIP'
+	option src_dip '113.160.73.210'
+	option reflection '0'
+
+config redirect
+	option target 'DNAT'
+	option src 'wan'
+	option dest 'lan'
+	option proto 'tcp'
+	option src_dport '3022'
+	option dest_ip '192.168.51.71'
+	option dest_port '22'
+	option name 'Sapd'
+	option src_dip '113.160.73.210'
+	option reflection '0'
+
+config redirect
+	option target 'DNAT'
+	option src 'wan'
+	option dest 'lan'
+	option proto 'tcp'
+	option src_dport '80'
+	option dest_ip '192.168.51.71'
+	option dest_port '80'
+	option name 'Sapd'
+	option src_dip '113.160.73.210'
+	option reflection '0'
+
+config redirect
+	option target 'DNAT'
+	option src 'wan'
+	option dest 'lan'
+	option proto 'tcp'
+	option src_dport '2214'
+	option dest_ip '192.168.50.80'
+	option dest_port '22'
+	option name 'SSH_SMS'
+	option src_dip '113.160.73.210'
+	option reflection '0'
+
+config redirect
+	option target 'DNAT'
+	option src 'wan'
+	option dest 'lan'
+	option proto 'tcp'
+	option src_dport '6422'
+	option dest_ip '192.168.50.64'
+	option dest_port '22'
+	option name 'SSH_VPN_SHG'
+	option src_dip '113.160.73.210'
+	option reflection '0'
+
+config redirect
+	option target 'DNAT'
+	option src 'wan'
+	option dest 'lan'
+	option proto 'tcp'
+	option src_dport '23389'
+	option dest_ip '192.168.49.200'
+	option dest_port '3389'
+	option name 'Phong_remote'
+	option src_dip '113.160.73.210'
+	option reflection '1'
+
+config redirect
+	option target 'DNAT'
+	option src 'wan'
+	option dest 'lan'
+	option proto 'tcp'
+	option src_dport '33389'
+	option dest_ip '192.168.49.100'
+	option dest_port '3389'
+	option name 'Phong_remote'
+	option src_dip '113.160.73.210'
+	option reflection '1'
+	option enabled '0'
+
+config redirect
+	option target 'DNAT'
+	option src 'wan'
+	option dest 'lan'
+	option proto 'tcp'
+	option src_dport '1189'
+	option dest_ip '192.168.10.164'
+	option dest_port '3389'
+	option name 'Hieu_remote'
+	option src_dip '113.160.73.210'
+	option reflection '0'
+
+config redirect
+	option target 'DNAT'
+	option src 'wan'
+	option dest 'lan'
+	option proto 'udp'
+	option src_dport '4569'
+	option dest_ip '192.168.51.42'
+	option dest_port '4569'
+	option name 'VoIP_local'
+	option src_dip '113.160.73.210'
+	option reflection '0'
+
+config redirect
+	option target 'DNAT'
+	option src 'wan'
+	option dest 'lan'
+	option proto 'tcp'
+	option src_dport '52384'
+	option dest_ip '192.168.50.64'
+	option dest_port '52384'
+	option name 'SSH_VPN_SHG'
+	option src_dip '113.160.73.210'
+	option reflection '0'
+
+config redirect
+	option target 'DNAT'
+	option src 'wan'
+	option dest 'lan'
+	option proto 'tcp udp'
+	option src_dport '5060-5082'
+	option dest_ip '192.168.51.42'
+	option dest_port '5060-5082'
+	option name 'Trunk_VoIP_Hapu'
+	option src_dip '172.19.22.2'
+	option reflection '0'
+
+config redirect
+	option target 'DNAT'
+	option src 'wan'
+	option dest 'lan'
+	option proto 'tcp'
+	option src_dport '5142'
+	option dest_ip '192.168.51.42'
+	option dest_port '22'
+	option name 'SSH_VoIP_Hapu'
+	option src_dip '172.19.22.2'
+	option reflection '0'
+
+config redirect
+	option target 'DNAT'
+	option src 'wan'
+	option dest 'lan'
+	option proto 'tcp'
+	option src_dport '8200-8299'
+	option dest_ip '192.168.51.251'
+	option dest_port '8200-8299'
+	option name 'TuanNM_stream'
+	option src_dip '172.19.22.2'
+	option reflection '0'
+
+config redirect
+	option target 'DNAT'
+	option src 'wan'
+	option dest 'lan'
+	option proto 'tcp'
+	option src_dport '8100-8199'
+	option dest_ip '192.168.51.252'
+	option dest_port '8100-8199'
+	option name 'TuanNM_stream'
+	option src_dip '172.19.22.2'
+	option reflection '0'
+
+config redirect
+	option target 'DNAT'
+	option src 'wan'
+	option dest 'lan'
+	option proto 'tcp'
+	option src_dport '8000-8099'
+	option dest_ip '192.168.51.253'
+	option dest_port '8000-8099'
+	option name 'TuanNM_stream'
+	option src_dip '172.19.22.2'
+	option reflection '0'
+
+config redirect
+	option target 'DNAT'
+	option src 'wan'
+	option dest 'lan'
+	option proto 'tcp udp'
+	option src_dport '5060-5082'
+	option dest_ip '192.168.51.42'
+	option dest_port '5060-5082'
+	option name 'Trunk_VoIP_Hapu'
+	option src_dip '172.19.24.2'
+	option reflection '0'
+
+config redirect
+	option target 'DNAT'
+	option src 'wan'
+	option dest 'lan'
+	option proto 'tcp'
+	option src_dport '8200-8299'
+	option dest_ip '192.168.51.251'
+	option dest_port '8200-8299'
+	option name 'TuanNM_stream'
+	option src_dip '172.19.24.2'
+	option reflection '0'
+
+config redirect
+	option target 'DNAT'
+	option src 'wan'
+	option dest 'lan'
+	option proto 'tcp'
+	option src_dport '8100-8199'
+	option dest_ip '192.168.51.252'
+	option dest_port '8100-8199'
+	option name 'TuanNM_stream'
+	option src_dip '172.19.24.2'
+	option reflection '0'
+
+config redirect
+	option target 'DNAT'
+	option src 'wan'
+	option dest 'lan'
+	option proto 'tcp'
+	option src_dport '8000-8099'
+	option dest_ip '192.168.51.253'
+	option dest_port '8000-8099'
+	option name 'TuanNM_stream'
+	option src_dip '172.19.24.2'
+	option reflection '0'
+
+config redirect
+	option target 'DNAT'
+	option src 'wan'
+	option dest 'lan'
+	option proto 'tcp udp'
+	option src_dport '5060-5082'
+	option dest_ip '192.168.51.42'
+	option dest_port '5060-5082'
+	option name 'Trunk_VoIP_Hapu'
+	option src_dip '117.4.252.45'
+	option reflection '0'
+
+config redirect
+	option target 'DNAT'
+	option src 'wan'
+	option dest 'lan'
+	option proto 'udp'
+	option src_dport '4569'
+	option dest_ip '192.168.51.41'
+	option dest_port '4569'
+	option name 'VoIP_local2'
+	option src_dip '117.4.252.45'
+	option reflection '0'
+
+config redirect
+	option target 'DNAT'
+	option src 'wan'
+	option dest 'lan'
+	option proto 'tcp'
+	option src_dport '52348'
+	option dest_ip '192.168.50.72'
+	option dest_port '52348'
+	option name 'Sohagame_ssh'
+	option src_dip '117.4.250.39'
+	option reflection '0'
+
+config redirect
+	option target 'DNAT'
+	option src 'wan'
+	option dest 'lan'
+	option proto 'udp'
+	option src_dport '4569'
+	option dest_ip '192.168.51.39'
+	option dest_port '4569'
+	option name 'VoIP_local_TuanNA'
+	option src_dip '117.4.250.39'
+	option reflection '1'
+
+config zone
+	option forward 'REJECT'
+	option output 'ACCEPT'
+	option name 'bank'
+	option input 'REJECT'
+	option masq '1'
+	option mtu_fix '1'
+	option network 'vlan1316 vlan1319 vlan1320'
+
+config zone
+	option input 'ACCEPT'
+	option output 'ACCEPT'
+	option name 'wepay'
+	option forward 'ACCEPT'
+	option network 'VPN2'
+
+config rule
+	option dest_port '68'
+	option family 'ipv4'
+	option icmp_type 'echo-request'
+	option name 'Allow-Ping'
+	option proto 'icmp'
+	option src 'bank'
+	option target 'ACCEPT'
+
+config redirect
+	option target 'DNAT'
+	option src 'bank'
+	option dest 'wepay'
+	option proto 'tcp'
+	option name 'Bank2Wepay'
+	option dest_ip '10.3.0.3'
+	option src_dport '80'
+	option dest_port '10007'
+	option reflection '0'
+
+config redirect
+	option target 'DNAT'
+	option src 'bank'
+	option dest 'wepay'
+	option proto 'tcp'
+	option name 'TPBank2Wepay'
+	option dest_ip '10.3.0.3'
+	option src_dport '80'
+	option dest_port '10009'
+	option reflection '0'
+
+config redirect
+	option target 'DNAT'
+	option src 'bank'
+	option dest 'wepay'
+	option proto 'tcp'
+	option name 'VCB2Wepay'
+	option dest_ip '10.3.0.3'
+	option src_dport '80'
+	option dest_port '10008'
+	option reflection '0'
+
+config forwarding
+	option dest 'bank'
+	option src 'wepay'
+

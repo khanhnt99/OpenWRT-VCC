@@ -1,0 +1,435 @@
+
+config dnsmasq 'dnsmasq'
+	option authoritative '1'
+	option domain 'lan'
+	option domainneeded '1'
+	option expandhosts '1'
+	option leasefile '/tmp/dhcp.leases'
+	option local '/lan/'
+	option localise_queries '1'
+	option nonwildcard '1'
+	option rebind_protection '1'
+	option rebind_localhost '1'
+	list server '8.8.8.8'
+#	list server '1.1.1.1'
+#	list server '208.67.222.222'
+	option dnsforwardmax '1000'
+	option cachesize '10000'
+	option dhcpleasemax '1000'
+	option localservice '1'
+	option noresolv '1'
+	option notinterface 'lo'
+
+config dhcp 'lan_11'
+#	option dhcpv6 'server'
+	option interface 'lan_11'
+	option leasetime '24h'
+	option limit '200'
+	option ra 'server'
+	option ra_management '1'
+	option start '20'
+
+config dhcp 'lan_23'
+#        option dhcpv6 'server'
+        option interface 'lan_23'
+        option leasetime '24h'
+        option limit '240'
+        option ra 'server'
+        option ra_management '1'
+        option start '20'
+
+config dhcp 'lan_25'
+#	option dhcpv6 'server'
+	option interface 'lan_25'
+	option leasetime '24h'
+	option limit '240'
+	option ra 'server'
+	option ra_management '1'
+	option start '20'
+
+config dhcp 'lan_40'
+#	option dhcpv6 'server'
+	option interface 'lan_40'
+	option leasetime '24h'
+	option limit '200'
+	option ra 'server'
+	option ra_management '1'
+	option start '20'
+
+config dhcp 'lan_22'
+	option interface 'lan_22'
+	option leasetime '24h'
+	option limit '200'
+	option start '20'
+
+config dhcp 'lan_21'
+#	option dhcpv6 'server'
+	option interface 'lan_21'
+	option leasetime '24h'
+	option limit '200'
+	option ra 'server'
+	option ra_management '1'
+	option start '20'
+
+config dhcp 'lan_24'
+#	option dhcpv6 'server'
+	option interface 'lan_24'
+	option leasetime '24h'
+	option limit '180'
+	option ra 'server'
+	option ra_management '1'
+	option start '20'
+
+config dhcp 'lan_19'
+#	option dhcpv6 'server'
+	option interface 'lan_19'
+	option leasetime '24h'
+	option limit '200'
+	option ra 'server'
+	option ra_management '1'
+	option start '20'
+
+config dhcp 'lan_20'
+#	option dhcpv6 'server'
+	option interface 'lan_20'
+	option leasetime '24h'
+	option limit '200'
+	option ra 'server'
+	option ra_management '1'
+	option start '20'
+
+config dhcp 'lan_42'
+#	option dhcpv6 'server'
+	option interface 'lan_42'
+	option leasetime '24h'
+	option limit '200'
+	option ra 'server'
+	option ra_management '1'
+	option start '20'
+
+config dhcp 'lan_44'
+#	option dhcpv6 'server'
+	option interface 'lan_44'
+	option leasetime '24h'
+	option limit '200'
+	option ra 'server'
+	option ra_management '1'
+	option start '20'
+
+config dhcp 'lan_17'
+#	option dhcpv6 'server'
+	option interface 'lan_17'
+	option leasetime '24h'
+	option ra 'server'
+	option ra_management '1'
+	option start '20'
+	option limit '80'
+
+config dhcp 'lan_18'
+#	option dhcpv6 'server'
+	option interface 'lan_18'
+	option leasetime '24h'
+	option limit '200'
+	option ra 'server'
+	option ra_management '1'
+	option start '20'
+
+config host 'host_17'
+	option dns '1'
+	option ip '192.168.18.103'
+	option mac '44:8A:5B:CD:E5:88'
+	option name 'TienHV'
+
+config host 'host_18'
+	option mac '30:9C:23:AE:90:AD'
+	option name 'TUANNA'
+	option ip '192.168.22.200'
+
+config host 'host_19'
+	option ip '192.168.22.222'
+	option mac 'AC:87:A3:30:33:29'
+	option name 'TrungNQ'
+
+config host 'host_20'
+	option mac '00:1B:21:1D:61:01'
+	option name 'LuaNN'
+	option ip '192.168.22.250'
+
+config host 'host_21'
+        option mac '30:9c:23:4a:6d:71'
+        option name 'KieuAnh'
+        option ip '192.168.21.192'
+
+config odhcpd 'odhcpd'
+	option maindhcp '0'
+	option leasefile '/tmp/hosts/odhcpd'
+	option leasetrigger '/usr/sbin/odhcpd-update'
+	option loglevel '4'
+
+config dhcp 'lan_59'
+	option leasetime '24h'
+	option interface 'lan_59'
+	option start '20'
+	option limit '200'
+
+config dhcp 'lan_60'
+	option leasetime '24h'
+	option interface 'lan_60'
+	option start '20'
+	option limit '200'
+
+config host
+        option name 'HungNV_laptop'
+        option dns '1'
+        option mac 'F8:B4:6A:1B:58:67'
+        option ip '192.168.17.200'
+
+config host
+        option name 'HungNV_PC'
+        option dns '1'
+        option mac '18:C0:4D:70:A1:79'
+        option ip '192.168.17.126'
+
+config dhcp 'lan_26'
+	option leasetime '24h'
+	option interface 'lan_26'
+	option start '20'
+	option limit '200'
+
+config dhcp 'lan_27'
+	option leasetime '24h'
+	option interface 'lan_27'
+	option start '20'
+	option limit '200'
+
+config dhcp 'lan_43'
+	option leasetime '24h'
+	option interface 'lan_43'
+	option start '20'
+	option limit '200'
+
+config dhcp 'lan_45'
+	option leasetime '24h'
+	option interface 'lan_45'
+	option start '20'
+	option limit '200'
+
+config dhcp 'lan_46'
+	option leasetime '24h'
+	option interface 'lan_46'
+	option start '20'
+	option limit '200'
+
+config dhcp 'lan_53'
+        option leasetime '24h'
+        option interface 'lan_53'
+        option start '180'
+        option limit '253'
+
+config host
+        option name 'EVENG'
+        option mac '0c:c4:7a:13:a8:64'
+        option ip '192.168.53.254'
+
+config dhcp 'lan_28'
+	option leasetime '24h'
+	option interface 'lan_28'
+	option start '20'
+	option limit '200'
+
+config dhcp 'lan_29'
+	option leasetime '24h'
+	option interface 'lan_29'
+	option start '20'
+	option limit '200'
+
+config dhcp 'lan_30'
+	option leasetime '24h'
+	option interface 'lan_30'
+	option start '20'
+	option limit '220'
+
+config dhcp 'lan_31'
+	option leasetime '24h'
+	option interface 'lan_31'
+	option start '20'
+	option limit '220'
+
+config dhcp 'lan_32'
+	option leasetime '24h'
+	option interface 'lan_32'
+	option start '20'
+	option limit '220'
+
+config dhcp 'lan_33'
+	option leasetime '24h'
+	option interface 'lan_33'
+	option start '20'
+	option limit '220'
+
+config dhcp 'lan_34'
+	option leasetime '24h'
+	option interface 'lan_34'
+	option start '20'
+	option limit '220'
+
+config dhcp 'lan_35'
+	option leasetime '24h'
+	option interface 'lan_35'
+	option start '20'
+	option limit '200'
+
+config dhcp 'lan_36'
+	option leasetime '24h'
+	option interface 'lan_36'
+	option start '20'
+	option limit '200'
+
+config dhcp 'lan_37'
+	option leasetime '24h'
+	option interface 'lan_37'
+	option start '20'
+	option limit '220'
+
+config dhcp 'lan_38'
+	option leasetime '24h'
+	option interface 'lan_38'
+	option start '20'
+	option limit '200'
+
+config dhcp 'lan_39'
+	option leasetime '24h'
+	option interface 'lan_39'
+	option start '20'
+	option limit '200'
+
+config dhcp 'lan_41'
+	option leasetime '24h'
+	option interface 'lan_41'
+	option start '20'
+	option limit '200'
+
+config dhcp 'lan_48'
+	option leasetime '24h'
+	option interface 'lan_48'
+	option start '20'
+	option limit '200'
+
+config dhcp 'lan_49'
+	option leasetime '24h'
+	option interface 'lan_49'
+	option start '20'
+	option limit '200'
+
+config dhcp 'lan_53'
+        option leasetime '24h'
+        option interface 'lan_53'
+        option start '101'
+        option limit '251'
+
+config dhcp 'lan_65'
+	option interface 'lan_65'
+	option start '20'
+	option limit '3900'
+	option leasetime '12h'
+
+config host
+	option name 'ThangVV'
+	option mac '44:8A:5B:9A:7F:15'
+	option ip '192.168.28.42'
+
+config host
+	option name 'TanNT'
+	option mac '4C:CC:6A:0B:56:53'
+	option ip '192.168.29.242'
+
+config host
+        option name 'NguyenNhanThang'
+        option mac '3c:22:fb:ce:d7:73'
+        option ip '192.168.71.217'
+
+config host
+        option name 'Bo_WOW'
+        option mac '30:9c:23:d7:75:44'
+        option ip '192.168.33.200'
+
+config host
+        option name 'TaiND_XS'        
+        option mac 'f8:38:80:85:20:ab'
+        option ip '192.168.79.90'
+
+config host
+        option name 'TaiND_VIVO'        
+#        option mac 'f8:38:80:85:20:ab'
+        option mac '88:f7:bf:11:a1:d9'
+        option ip '192.168.79.91'
+
+config host
+        option name 'MungNT_Iphone8'        
+#        option mac '80:B0:3D:3B:74:40'
+        option mac '66:18:40:7d:ae:45'
+        option ip '192.168.79.93'
+
+config host
+        option name 'MungNT_iphone6'        
+        option mac 'FC:E9:98:8D:08:49'
+        option ip '192.168.79.94'
+
+config host
+        option name 'MungNT_a50'        
+#        option mac '7C:89:56:53:D6:87'
+        option mac 'f6:5f:35:dc:a5:d7'
+        option ip '192.168.79.95'
+
+config host
+        option name 'MungNT_iphone7'        
+#        option mac '2C:33:61:F2:B1:AD'
+        option mac '2c:33:61:f2:b1:ac'
+        option ip '192.168.79.96'
+
+config host
+        option name 'HueNTT_note10'        
+#        option mac '30:AB:6A:BF:EC:78'
+        option mac '4a:4d:28:7e:28:5d'
+        option ip '192.168.79.97'
+
+config host
+        option name 'HueNTT_iphone6'        
+        option mac 'FC:E9:98:98:85:1B'
+        option ip '192.168.79.98'
+
+config host
+        option name 'ThangCV_Macbook'        
+        option mac '38:f9:d3:5e:26:d5'
+        option ip '192.168.79.99'
+
+config host
+        option name 'ThangCV_Note10'        
+#        option mac '8C:B8:4A:A0:0C:F3'
+        option mac '2e:41:eb:d0:0f:b4'
+        option ip '192.168.79.100'
+
+config host
+        option name 'ThangCV_Iphone6'        
+        option mac 'CC:29:F5:D7:10:72'
+        option ip '192.168.79.101'
+
+config host
+        option name 'ThangCV_Huawei'        
+        option mac 'd4:62:ea:ee:04:a9'
+        option ip '192.168.79.102'
+
+config host
+        option name 'VTN_27.254'
+        option mac '48:f8:b3:6d:b1:d4'
+        option ip '192.168.27.254'
+
+config host
+        option name 'SHG_test'
+        option mac '3c:7c:3f:a6:c7:d0'
+        option ip '192.168.43.254'
+
+config isc_dhcpd 'isc_dhcpd'
+	option authoritative '1'
+	option default_lease_time '3600'
+	option max_lease_time '86400'
