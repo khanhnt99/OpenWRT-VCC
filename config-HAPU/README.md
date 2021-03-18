@@ -1,1 +1,0 @@
-File cấu hình của HAPU-GATEWAY chạy OpenWRT.
