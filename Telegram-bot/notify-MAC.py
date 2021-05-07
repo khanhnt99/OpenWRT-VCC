@@ -3,9 +3,9 @@
 import os
 import re
 
-def outputMAC():
-    print("Nhap MAC voi dinh dang 'xx:xx:xx:xx:xx':  ")
-    MAC = input()
+def outputMAC(MAC):
+    # print("Nhap MAC voi dinh dang 'xx:xx:xx:xx:xx':  ")
+    # MAC = input()
     with open("/var/dhcp.leases") as f:
         data = f.read()
         # data_json = json.loads(data)
@@ -21,7 +21,9 @@ def outputMAC():
             
 
 def main():
-    outputMAC()
+    print("Nhap MAC voi dinh dang 'xx:xx:xx:xx:xx':  ")
+    MAC = input()
+    outputMAC(MAC)
 
 if __name__== "__main__":
     main()
