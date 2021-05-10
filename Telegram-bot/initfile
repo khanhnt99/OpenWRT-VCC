@@ -10,7 +10,9 @@ case "$1" in
   stop)
     echo "Stopping mac2ip"
     # kill application you want to stop
-    killall python3
+    MYPID=$(ps | grep /root/Mac2ip.py | grep -vw grep | awk '{print $1}');
+    echo ${MYPID};
+    kill -9 ${MYPID};
     ;;
   *)
     echo "Usage: /etc/init.d/mac2ip{start|stop}"
