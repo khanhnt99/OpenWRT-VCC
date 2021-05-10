@@ -1,0 +1,21 @@
+#! /bin/sh
+# /etc/init.d/mac2ip
+
+case "$1" in
+  start)
+    echo "Starting mac2ip"
+    # run application you want to start
+    python3 /root/Mac2ip.py &
+    ;;
+  stop)
+    echo "Stopping mac2ip"
+    # kill application you want to stop
+    killall python3
+    ;;
+  *)
+    echo "Usage: /etc/init.d/mac2ip{start|stop}"
+    exit 1
+    ;;
+esac
+
+exit 0
